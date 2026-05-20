@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAS Bahasa Arab VIII - MTsN 9 Pidie</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter (UI) & Amiri (Arabic Typography) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons for clean UI elements -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            arabic: ['Amiri', 'serif'],
+          },
+          colors: {
+            kemenag: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            },
+            gold: {
+              500: '#d4af37',
+              600: '#b8901c',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #16a34a;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #15803d;
+    }
+
+    /* Print styles optimized for standard paper printing */
+    @media print {
+      body {
+        background-color: white !important;
+        color: black !important;
+        font-size: 11pt !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-area {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .page-break {
+        page-break-after: always;
+      }
+      .exam-grid {
+        display: block !important;
+      }
+      .question-card {
+        break-inside: avoid;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 10px 0 !important;
+        margin-bottom: 15px !important;
+        border-bottom: 1px dashed #ccc !important;
+      }
+      .kop-logo {
+        filter: grayscale(100%);
+      }
+    }
+
+    /* Smooth fade in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col antialiased selection:bg-kemenag-100 selection:text-kemenag-900">
+
+  <!-- ==================== HEADER UTAMA & NAVIGASI (NO-PRINT) ==================== -->
+  <header class="no-print bg-gradient-to-r from-kemenag-800 to-kemenag-900 text-white shadow-lg border-b-4 border-gold-500 sticky top-0 z-40 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5">
+        <!-- SVG Kemenag / Islamic Emblem Logo -->
+        <div class="p-2 bg-white rounded-full shadow-inner flex items-center justify-center w-12 h-12">
+          <svg class="w-10 h-10 text-kemenag-700" viewBox="0 0 100 100" fill="currentColor">
+            <path d="M50 5 L90 28 L90 72 L50 95 L10 72 L10 28 Z" fill="none" stroke="currentColor" stroke-width="6"/>
+            <path d="M50 15 L80 32 L80 68 L50 85 L20 68 L20 32 Z" fill="#15803d"/>
+            <path d="M50 22 C42 22 35 28 35 37 C35 50 50 68 50 68 C50 68 65 50 65 37 C65 28 58 22 50 22 Z" fill="#fff"/>
+            <circle cx="50" cy="37" r="7" fill="#d4af37"/>
+            <rect x="42" y="66" width="16" height="4" rx="2" fill="#fff"/>
+            <rect x="35" y="73" width="30" height="4" rx="2" fill="#d4af37"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-lg sm:text-xl font-bold tracking-tight">MTsN 9 PIDIE</h1>
+          <p class="text-xs text-green-100 font-medium">Penilaian Akhir Semester (PAS) Genap • Bahasa Arab Kelas VIII</p>
+        </div>
+      </div>
+      
+      <!-- Nav Tabs -->
+      <nav class="flex flex-wrap justify-center gap-1 sm:gap-2 bg-kemenag-900/40 p-1.5 rounded-xl border border-white/10">
+        <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 bg-white text-kemenag-800 shadow">
+          <i class="fa-solid fa-house mr-1.5"></i> Dashboard
+        </button>
+        <button onclick="switchTab('belajar')" id="tab-belajar" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 text-gray-200 hover:text-white hover:bg-white/10">
+          <i class="fa-solid fa-graduation-cap mr-1.5"></i> Mode Belajar
+        </button>
+        <button onclick="switchTab('ujian')" id="tab-ujian" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 text-gray-200 hover:text-white hover:bg-white/10">
+          <i class="fa-solid fa-laptop-code mr-1.5"></i> Mode Ujian
+        </button>
+        <button onclick="switchTab('kamus')" id="tab-kamus" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 text-gray-200 hover:text-white hover:bg-white/10">
+          <i class="fa-solid fa-book-open mr-1.5"></i> Kamus Mini
+        </button>
+        <button onclick="switchTab('cetak')" id="tab-cetak" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 text-gray-200 hover:text-white hover:bg-white/10">
+          <i class="fa-solid fa-print mr-1.5"></i> Print Center
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTAINER ==================== -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- TAB 1: DASHBOARD -->
+    <section id="content-dashboard" class="tab-content fade-in space-y-6">
+      <div class="bg-gradient-to-r from-emerald-600 to-green-700 rounded-2xl text-white p-6 sm:p-8 shadow-xl relative overflow-hidden">
+        <div class="absolute right-0 top-0 translate-x-12 -translate-y-12 text-green-500/10 pointer-events-none">
+          <i class="fa-solid fa-mosque text-[240px]"></i>
+        </div>
+        <div class="relative z-10 max-w-2xl">
+          <span class="bg-gold-500/30 text-gold-100 border border-gold-500/40 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Tahun Pelajaran 2025/2026</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold mt-3.5 mb-2 leading-tight">Uji Kemampuan Bahasa Arab Anda dengan Percaya Diri!</h2>
+          <p class="text-green-500/10 text-emerald-100 text-sm sm:text-base mb-6 leading-relaxed">Selamat datang di portal PAS Bahasa Arab interaktif untuk Kelas VIII Madrasah Tsanawiyah Negeri 9 Pidie. Persiapkan ujian Anda melalui latihan berkala atau simulasi langsung.</p>
+          
+          <div class="flex flex-wrap gap-3">
+            <button onclick="switchTab('belajar')" class="bg-white text-kemenag-800 hover:bg-emerald-50 font-bold px-5 py-3 rounded-xl transition duration-200 shadow shadow-black/10 flex items-center gap-2 text-sm">
+              <i class="fa-solid fa-circle-play text-lg"></i> Mulai Latihan Mandiri
+            </button>
+            <button onclick="switchTab('ujian')" class="bg-kemenag-800 text-white hover:bg-kemenag-900 border border-white/20 font-bold px-5 py-3 rounded-xl transition duration-200 flex items-center gap-2 text-sm">
+              <i class="fa-solid fa-hourglass-start text-lg"></i> Ambil Ujian Simulasi
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+          <div class="p-3.5 bg-kemenag-50 text-kemenag-600 rounded-xl">
+            <i class="fa-solid fa-list-check text-2xl"></i>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 font-medium uppercase tracking-wider">Total Soal</p>
+            <h3 class="text-2xl font-black text-gray-800">50 Butir</h3>
+            <p class="text-xs text-gray-400 mt-0.5">5 Kategori Pembahasan</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+          <div class="p-3.5 bg-yellow-50 text-yellow-600 rounded-xl">
+            <i class="fa-solid fa-clock text-2xl"></i>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 font-medium uppercase tracking-wider">Waktu Ujian</p>
+            <h3 class="text-2xl font-black text-gray-800">90 Menit</h3>
+            <p class="text-xs text-gray-400 mt-0.5">Rata-rata 1.8 m / soal</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+          <div class="p-3.5 bg-blue-50 text-blue-600 rounded-xl">
+            <i class="fa-solid fa-trophy text-2xl"></i>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 font-medium uppercase tracking-wider">Skor Tertinggi Anda</p>
+            <h3 id="best-score" class="text-2xl font-black text-gray-800">-</h3>
+            <p class="text-xs text-gray-400 mt-0.5">Disimpan di peramban ini</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+          <div class="p-3.5 bg-purple-50 text-purple-600 rounded-xl">
+            <i class="fa-solid fa-chart-line text-2xl"></i>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 font-medium uppercase tracking-wider">Status Simulasi</p>
+            <h3 id="completion-status" class="text-lg font-bold text-gray-800">Belum Ada Riwayat</h3>
+            <p class="text-xs text-gray-400 mt-0.5">Coba simulasi ujian sekarang</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kategori Soal Detail -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <h3 class="text-lg font-bold text-gray-800 mb-5 flex items-center gap-2">
+          <i class="fa-solid fa-tags text-kemenag-600"></i> Cakupan Pembahasan Bahasa Arab Kelas VIII
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="border border-gray-100 rounded-xl p-4 bg-gray-50/50 hover:border-kemenag-100 hover:bg-kemenag-50/10 transition duration-150">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-gray-800">A. Materi Jam (الساعة)</span>
+              <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">10 Soal</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Meliputi pengenalan jam, seperempat jam (الربع), setengah jam (النصف), kurang (إلا), dan lebih (و).</p>
+          </div>
+
+          <div class="border border-gray-100 rounded-xl p-4 bg-gray-50/50 hover:border-kemenag-100 hover:bg-kemenag-50/10 transition duration-150">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-gray-800">B. Aktivitas Harian (النشاط اليومي)</span>
+              <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">10 Soal</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Pembelajaran kosakata aktivitas harian (tidur, belajar, makan, sekolah) menggunakan dhomir ana (saya).</p>
+          </div>
+
+          <div class="border border-gray-100 rounded-xl p-4 bg-gray-50/50 hover:border-kemenag-100 hover:bg-kemenag-50/10 transition duration-150">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-gray-800">C. Kosakata Dasar (المفردات)</span>
+              <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">10 Soal</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Memahami arti kata benda (isim) umum di lingkungan madrasah, rumah, rumah ibadah, dan pasar.</p>
+          </div>
+
+          <div class="border border-gray-100 rounded-xl p-4 bg-gray-50/50 hover:border-kemenag-100 hover:bg-kemenag-50/10 transition duration-150">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-gray-800">D. Kalimat Sederhana</span>
+              <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">10 Soal</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Kecocokan subjek dhomir (أنا, هو, هي, نحن, هم) dengan bentuk fi'il mudhori' yang sepadan.</p>
+          </div>
+
+          <div class="border border-gray-100 rounded-xl p-4 bg-gray-50/50 hover:border-kemenag-100 hover:bg-kemenag-50/10 transition duration-150">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-gray-800">E. Soal Campuran</span>
+              <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">10 Soal</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Uji pemahaman kontekstual menyusun kalimat fungsional terkait tempat, alat tulis, dan waktu.</p>
+          </div>
+
+          <div class="border border-dashed border-gray-200 rounded-xl p-4 flex flex-col justify-center items-center text-center">
+            <span class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">Mata Pelajaran</span>
+            <span class="text-base font-extrabold text-kemenag-700">Bahasa Arab - Kelas VIII</span>
+            <span class="text-[10px] text-gray-400 mt-1">Sesuai Kurikulum Madrasah Kemenag RI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: MODE BELAJAR (PRACTICE) -->
+    <section id="content-belajar" class="tab-content fade-in hidden space-y-6">
+      <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 class="text-lg font-bold text-gray-800">Latihan Soal Mandiri</h2>
+          <p class="text-xs text-gray-500">Dapatkan koreksi jawaban secara langsung untuk pembelajaran maksimal.</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <select id="practice-filter" onchange="filterPracticeQuestions()" class="bg-gray-50 border border-gray-200 text-sm rounded-xl px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-kemenag-600">
+            <option value="all">Semua Kategori</option>
+            <option value="jam">Materi Jam (1-10)</option>
+            <option value="aktivitas">Aktivitas Harian (11-20)</option>
+            <option value="kosakata">Kosakata (21-30)</option>
+            <option value="kalimat">Kalimat Sederhana (31-40)</option>
+            <option value="campuran">Campuran (41-50)</option>
+          </select>
+          <button onclick="resetPractice()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-4 py-2 rounded-xl text-sm transition flex items-center gap-1.5">
+            <i class="fa-solid fa-rotate-left"></i> Reset Latihan
+          </button>
+        </div>
+      </div>
+
+      <!-- Practice Main Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Question Panel -->
+        <div class="lg:col-span-8 space-y-5">
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 relative overflow-hidden">
+            <!-- Progress Bar -->
+            <div class="absolute top-0 left-0 h-1.5 bg-kemenag-600 transition-all duration-300" id="practice-progress-bar" style="width: 2%;"></div>
+            
+            <div class="flex justify-between items-center mb-6">
+              <span class="bg-kemenag-50 text-kemenag-800 text-xs font-bold px-3 py-1.5 rounded-lg border border-kemenag-100" id="practice-category-label">Kategori Soal</span>
+              <span class="text-xs text-gray-400 font-bold" id="practice-number-label">Soal 1 dari 50</span>
+            </div>
+
+            <!-- Question Arabic -->
+            <div class="bg-emerald-50/30 border border-emerald-100/50 rounded-2xl p-6 sm:p-8 text-center my-6 relative">
+              <button onclick="speakArabic()" class="absolute right-4 top-4 text-emerald-600 hover:text-emerald-800 hover:bg-emerald-50 w-9 h-9 rounded-full flex items-center justify-center transition" title="Dengarkan Pelafalan">
+                <i class="fa-solid fa-volume-high text-lg"></i>
+              </button>
+              <h3 dir="rtl" id="practice-question-arabic" class="font-arabic text-3xl sm:text-4xl text-gray-800 font-bold leading-loose"></h3>
+            </div>
+
+            <!-- Options Grid -->
+            <div class="grid grid-cols-1 gap-3.5" id="practice-options-container">
+              <!-- Options loaded dynamically -->
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
+              <button onclick="prevPractice()" id="btn-practice-prev" class="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl text-sm transition flex items-center gap-1.5 disabled:opacity-40">
+                <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+              </button>
+              
+              <button onclick="revealExplanation()" id="btn-practice-explain" class="px-4 py-2.5 bg-yellow-50 text-yellow-700 hover:bg-yellow-100 font-semibold rounded-xl text-sm transition flex items-center gap-1.5 hidden">
+                <i class="fa-solid fa-lightbulb"></i> Penjelasan
+              </button>
+
+              <button onclick="nextPractice()" id="btn-practice-next" class="px-4 py-2.5 bg-kemenag-600 hover:bg-kemenag-700 text-white font-semibold rounded-xl text-sm transition flex items-center gap-1.5">
+                Berikutnya <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Explanation Box -->
+          <div id="practice-explanation-box" class="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-inner hidden">
+            <h4 class="text-blue-800 font-bold mb-2 flex items-center gap-1.5 text-sm sm:text-base">
+              <i class="fa-solid fa-circle-info"></i> Pembahasan Analitis:
+            </h4>
+            <p id="practice-explanation-text" class="text-xs sm:text-sm text-blue-700 leading-relaxed"></p>
+          </div>
+        </div>
+
+        <!-- Right Side: Sidebar Navigation Grid -->
+        <div class="lg:col-span-4">
+          <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+            <h4 class="text-sm font-bold text-gray-800 mb-4 flex items-center justify-between">
+              <span>Peta Soal Latihan</span>
+              <span id="practice-answered-count" class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">0/50 Selesai</span>
+            </h4>
+            
+            <div class="grid grid-cols-5 sm:grid-cols-10 lg:grid-cols-5 gap-2" id="practice-grid-container">
+              <!-- Grid items loaded dynamically -->
+            </div>
+
+            <!-- Color Legends -->
+            <div class="mt-6 pt-5 border-t border-gray-100 flex flex-col gap-2.5 text-xs text-gray-500">
+              <div class="flex items-center gap-2">
+                <span class="w-3.5 h-3.5 rounded-lg bg-kemenag-600"></span>
+                <span>Jawaban Benar</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-3.5 h-3.5 rounded-lg bg-red-500"></span>
+                <span>Jawaban Salah</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-3.5 h-3.5 rounded-lg bg-white border-2 border-kemenag-600"></span>
+                <span>Sedang Dipilih</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-3.5 h-3.5 rounded-lg bg-gray-100"></span>
+                <span>Belum Dikerjakan</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: MODE UJIAN (EXAM) -->
+    <section id="content-ujian" class="tab-content fade-in hidden space-y-6">
+      
+      <!-- Welcome Panel / Exam Setup -->
+      <div id="exam-welcome" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 max-w-2xl mx-auto text-center space-y-6">
+        <div class="w-16 h-16 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mx-auto text-3xl">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-gray-800">Ujian Simulasi Komputer (CBT)</h2>
+          <p class="text-xs sm:text-sm text-gray-500 mt-2">Uji kemampuan sesungguhnya di bawah tekanan waktu yang terkontrol.</p>
+        </div>
+
+        <div class="bg-gray-50 border border-gray-100 rounded-xl p-5 text-left text-xs sm:text-sm space-y-3.5 text-gray-600">
+          <h3 class="font-bold text-gray-800">Ketentuan & Panduan Ujian:</h3>
+          <div class="flex gap-2.5 items-start">
+            <i class="fa-solid fa-check text-kemenag-600 mt-0.5"></i>
+            <span>Ujian terdiri dari <strong>50 butir soal pilihan ganda</strong> dengan durasi <strong>90 menit</strong>.</span>
+          </div>
+          <div class="flex gap-2.5 items-start">
+            <i class="fa-solid fa-check text-kemenag-600 mt-0.5"></i>
+            <span>Nilai kelulusan minimum (KKM) mata pelajaran Bahasa Arab adalah <strong>75</strong>.</span>
+          </div>
+          <div class="flex gap-2.5 items-start">
+            <i class="fa-solid fa-check text-kemenag-600 mt-0.5"></i>
+            <span>Anda dapat menandai soal yang ragu-ragu untuk diperiksa ulang sebelum mengakhiri ujian.</span>
+          </div>
+          <div class="flex gap-2.5 items-start">
+            <i class="fa-solid fa-check text-kemenag-600 mt-0.5"></i>
+            <span>Ujian akan otomatis dinilai ketika timer habis atau ketika Anda mengklik tombol "Selesaikan Ujian".</span>
+          </div>
+        </div>
+
+        <button onclick="startExam()" class="w-full sm:w-auto bg-kemenag-600 hover:bg-kemenag-700 text-white font-bold px-8 py-3 rounded-xl shadow-lg transition duration-200">
+          Mulai Ujian Sekarang
+        </button>
+      </div>
+
+      <!-- Live Exam Panel -->
+      <div id="exam-panel" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left Column: Active Question -->
+        <div class="lg:col-span-8 space-y-5">
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 relative overflow-hidden">
+            <!-- Exam Progress Bar -->
+            <div class="absolute top-0 left-0 h-1.5 bg-yellow-500 transition-all duration-300" id="exam-progress-bar" style="width: 2%;"></div>
+            
+            <div class="flex justify-between items-center mb-6">
+              <span id="exam-section-badge" class="bg-yellow-50 text-yellow-800 text-xs font-bold px-3 py-1.5 rounded-lg border border-yellow-100">Kategori</span>
+              
+              <!-- Flag Review Button -->
+              <button onclick="toggleExamFlag()" id="btn-exam-flag" class="text-xs font-semibold px-3 py-1.5 rounded-lg border transition duration-150 flex items-center gap-1.5">
+                <i class="fa-regular fa-flag"></i> Ragu-ragu
+              </button>
+            </div>
+
+            <!-- Question Arabic Block -->
+            <div class="bg-gray-50 border border-gray-100 rounded-2xl p-6 sm:p-8 text-center my-6">
+              <h3 dir="rtl" id="exam-question-arabic" class="font-arabic text-3xl sm:text-4xl text-gray-800 font-bold leading-loose"></h3>
+            </div>
+
+            <!-- Options Container -->
+            <div class="grid grid-cols-1 gap-3.5" id="exam-options-container">
+              <!-- Handled via JS -->
+            </div>
+
+            <!-- Nav Controls -->
+            <div class="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
+              <button onclick="prevExamQuestion()" id="btn-exam-prev" class="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl text-sm transition flex items-center gap-1.5">
+                <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+              </button>
+              
+              <button onclick="nextExamQuestion()" id="btn-exam-next" class="px-4 py-2.5 bg-kemenag-600 hover:bg-kemenag-700 text-white font-semibold rounded-xl text-sm transition flex items-center gap-1.5">
+                Berikutnya <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Navigation Grid & Timer -->
+        <div class="lg:col-span-4 space-y-5">
+          <!-- Timer Card -->
+          <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 text-center space-y-3">
+            <span class="text-xs text-gray-400 font-bold uppercase tracking-wider">Sisa Waktu Ujian</span>
+            <div class="text-3xl font-black text-gray-800 tracking-wider flex items-center justify-center gap-1.5" id="exam-timer">
+              <i class="fa-regular fa-clock text-yellow-500"></i> 90:00
+            </div>
+          </div>
+
+          <!-- Navigation Grid -->
+          <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+            <h4 class="text-sm font-bold text-gray-800 mb-4 flex justify-between items-center">
+              <span>Lembar Jawaban</span>
+              <span id="exam-progress-counter" class="text-xs text-gray-500">0/50 Terisi</span>
+            </h4>
+
+            <div class="grid grid-cols-5 sm:grid-cols-10 lg:grid-cols-5 gap-2" id="exam-grid-container">
+              <!-- Loaded via JS -->
+            </div>
+
+            <!-- Legends -->
+            <div class="mt-6 pt-5 border-t border-gray-100 grid grid-cols-2 gap-3 text-[10px] sm:text-xs text-gray-500">
+              <div class="flex items-center gap-1.5">
+                <span class="w-3.5 h-3.5 rounded-lg bg-kemenag-600"></span>
+                <span>Terjawab</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-3.5 h-3.5 rounded-lg bg-yellow-500"></span>
+                <span>Ragu-ragu</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-center">
+                <span class="w-3.5 h-3.5 rounded-lg bg-white border-2 border-kemenag-600"></span>
+                <span>Aktif</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-3.5 h-3.5 rounded-lg bg-gray-100"></span>
+                <span>Belum Diisi</span>
+              </div>
+            </div>
+
+            <!-- End Exam Button -->
+            <button onclick="confirmSubmitExam()" class="mt-6 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl text-sm shadow transition duration-200">
+              Selesaikan Ujian
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exam Results Dashboard (Shows up on Submit) -->
+      <div id="exam-results" class="hidden space-y-6 max-w-4xl mx-auto">
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 text-center space-y-6">
+          <div id="result-medal-container" class="w-20 h-20 rounded-full mx-auto flex items-center justify-center text-4xl shadow-inner">
+            <!-- Icon sets by JS -->
+          </div>
+          <div>
+            <h2 id="result-greeting" class="text-xl sm:text-3xl font-extrabold text-gray-800">Ujian Selesai!</h2>
+            <p id="result-subtitle" class="text-xs sm:text-sm text-gray-500 mt-2">Berikut adalah detail ringkasan performa ujian simulasi Anda.</p>
+          </div>
+
+          <!-- Score Card -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 text-center">
+              <span class="text-xs text-gray-400 font-bold uppercase tracking-wider block mb-1">Skor Akhir</span>
+              <h3 id="result-score" class="text-3xl font-black text-gray-800">0</h3>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 text-center">
+              <span class="text-xs text-gray-400 font-bold uppercase tracking-wider block mb-1">Benar</span>
+              <h3 id="result-correct" class="text-3xl font-black text-green-600">0</h3>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 text-center">
+              <span class="text-xs text-gray-400 font-bold uppercase tracking-wider block mb-1">Salah</span>
+              <h3 id="result-wrong" class="text-3xl font-black text-red-500">0</h3>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 text-center">
+              <span class="text-xs text-gray-400 font-bold uppercase tracking-wider block mb-1">Kelulusan</span>
+              <h3 id="result-status" class="text-lg font-extrabold mt-1.5">LULUS</h3>
+            </div>
+          </div>
+
+          <div class="flex justify-center gap-3 pt-4">
+            <button onclick="resetExam()" class="bg-kemenag-600 hover:bg-kemenag-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm shadow transition duration-200">
+              Coba Ujian Kembali
+            </button>
+            <button onclick="switchTab('belajar')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-5 py-2.5 rounded-xl text-sm transition">
+              Tinjau Materi di Mode Belajar
+            </button>
+          </div>
+        </div>
+
+        <!-- Performance breakdown by Category -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <h3 class="text-lg font-bold text-gray-800 mb-5 flex items-center gap-2">
+            <i class="fa-solid fa-chart-pie text-kemenag-600"></i> Analisis Performa per Materi Pembahasan
+          </h3>
+          <div class="space-y-4" id="category-breakdown-container">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: KAMUS MINI -->
+    <section id="content-kamus" class="tab-content fade-in hidden space-y-6">
+      <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 class="text-lg font-bold text-gray-800">Kamus Mini PAS Bahasa Arab VIII</h2>
+          <p class="text-xs text-gray-500">Mempelajari hafalan kosakata yang diujikan dalam naskah ujian ini.</p>
+        </div>
+        <div class="w-full sm:w-auto flex gap-2">
+          <input type="text" id="kamus-search" oninput="filterKamus()" placeholder="Cari kosakata Arab / Indonesia..." class="w-full sm:w-64 bg-gray-50 border border-gray-200 text-sm rounded-xl px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-kemenag-600">
+          <select id="kamus-category" onchange="filterKamus()" class="bg-gray-50 border border-gray-200 text-sm rounded-xl px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-kemenag-600">
+            <option value="all">Semua Jenis</option>
+            <option value="Waktu">Keterangan Waktu</option>
+            <option value="Aktivitas">Kata Kerja Aktivitas</option>
+            <option value="Benda">Kata Benda (Isim)</option>
+            <option value="Subjek">Dhomir & Subjek</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Kamus Grid Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="kamus-grid">
+        <!-- Handled dynamically -->
+      </div>
+    </section>
+
+    <!-- TAB 5: PRINT CENTER -->
+    <section id="content-cetak" class="tab-content fade-in hidden space-y-6">
+      <div class="no-print bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 class="text-lg font-bold text-gray-800">Print & PDF Hub</h2>
+          <p class="text-xs text-gray-500">Dapatkan naskah fisik ujian yang diformat secara akademis untuk dicetak langsung.</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="toggleKeyPrint()" id="btn-toggle-key-print" class="bg-yellow-50 text-yellow-700 border border-yellow-200 hover:bg-yellow-100 font-bold px-4 py-2 rounded-xl text-sm transition flex items-center gap-1.5">
+            <i class="fa-solid fa-key"></i> Tampilkan Kunci Jawaban (Sembunyi)
+          </button>
+          <button onclick="window.print()" class="bg-kemenag-600 hover:bg-kemenag-700 text-white font-bold px-5 py-2 rounded-xl text-sm transition flex items-center gap-1.5 shadow">
+            <i class="fa-solid fa-print"></i> Cetak / Simpan PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Printable Exam Paper Layout -->
+      <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-gray-200 print-area max-w-4xl mx-auto" id="printable-sheet">
+        <!-- KOP SURAT RESMI -->
+        <div class="text-center border-b-[5px] border-double border-gray-800 pb-4 mb-6">
+          <h3 class="text-base sm:text-lg font-bold tracking-wide uppercase">Kementerian Agama Republik Indonesia</h3>
+          <h3 class="text-sm sm:text-base font-extrabold uppercase">Kantor Kementerian Agama Kabupaten Pidie</h3>
+          <h2 class="text-lg sm:text-2xl font-black uppercase text-kemenag-800">Madrasah Tsanawiyah Negeri 9 Pidie</h2>
+          <p class="text-[11px] sm:text-xs text-gray-500 italic mt-1">Alamat: Jl. Raya Banda Aceh - Medan, Kab. Pidie, Provinsi Aceh</p>
+        </div>
+
+        <!-- IDENTITAS UJIAN -->
+        <div class="text-center mb-6 space-y-1">
+          <h4 class="text-sm sm:text-base font-extrabold tracking-wide">LEMBAR SOAL PENILAIAN AKHIR SEMESTER (PAS) GENAP</h4>
+          <h5 class="text-xs font-bold tracking-normal">TAHUN AJARAN 2025/2026</h5>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 border border-gray-300 p-4 rounded-xl text-xs sm:text-sm mb-6 bg-gray-50/50">
+          <div class="space-y-1.5">
+            <div class="flex"><span class="w-28 font-semibold">Mata Pelajaran</span><span>: Bahasa Arab</span></div>
+            <div class="flex"><span class="w-28 font-semibold">Kelas / Semester</span><span>: VIII (Delapan) / II (Genap)</span></div>
+          </div>
+          <div class="space-y-1.5">
+            <div class="flex"><span class="w-28 font-semibold">Hari / Tanggal</span><span>: ........................ 2026</span></div>
+            <div class="flex"><span class="w-28 font-semibold">Waktu</span><span>: 90 Menit</span></div>
+          </div>
+        </div>
+
+        <!-- PETUNJUK UMUM -->
+        <div class="border border-gray-300 p-4 rounded-xl text-[11px] sm:text-xs text-gray-600 space-y-1 mb-8">
+          <h4 class="font-bold text-gray-800 mb-1">PETUNJUK UMUM:</h4>
+          <p>1. Tulislah nama, nomor ujian, dan kelas Anda pada lembar jawaban yang disediakan.</p>
+          <p>2. Periksa dan bacalah soal-soal dengan teliti sebelum menjawab.</p>
+          <p>3. Dahulukan menjawab soal-soal yang Anda anggap mudah.</p>
+          <p>4. Pilih satu jawaban yang paling tepat dengan memberi tanda silang (X) pada huruf A, B, C, atau D.</p>
+        </div>
+
+        <!-- KONTEN SOAL -->
+        <div class="space-y-8" id="print-questions-container">
+          <!-- Loaded dynamically via JS -->
+        </div>
+
+        <!-- KUNCI JAWABAN (PRINT-ONLY OR TOGGLEABLE) -->
+        <div id="print-key-sheet" class="mt-12 pt-8 border-t border-gray-300 hidden break-before-page">
+          <h3 class="text-lg font-bold mb-4 text-center text-kemenag-800">KUNCI JAWABAN PAS BAHASA ARAB KELAS VIII</h3>
+          <div class="grid grid-cols-5 gap-4 text-sm font-semibold max-w-2xl mx-auto" id="print-key-grid">
+            <!-- Loaded dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="no-print bg-gray-900 text-gray-400 py-6 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs space-y-2">
+      <p class="font-bold text-gray-300">© 2026 Madrasah Tsanawiyah Negeri 9 Pidie • Kementerian Agama RI</p>
+      <p>Aplikasi Penilaian Digital Interaktif ini ditujukan sebagai media pembelajaran, latihan, dan evaluasi berkala Bahasa Arab Kelas VIII Semester Genap.</p>
+    </div>
+  </footer>
+
+  <!-- ==================== CUSTOM MODAL DIALOGS (NO-PRINT) ==================== -->
+  <div id="custom-modal" class="no-print fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden transition-all duration-300">
+    <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-5 transform scale-95 transition-all">
+      <div id="modal-icon-bg" class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-2xl mx-auto">
+        <i id="modal-icon" class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <div class="text-center space-y-1">
+        <h3 id="modal-title" class="text-lg font-bold text-gray-800">Judul Modal</h3>
+        <p id="modal-body" class="text-sm text-gray-500">Isi penjelasan rincian modal tindakan di sini.</p>
+      </div>
+      <div class="flex gap-2.5">
+        <button id="modal-btn-cancel" onclick="closeModal()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 rounded-xl text-sm transition">Batal</button>
+        <button id="modal-btn-confirm" class="flex-1 bg-kemenag-600 hover:bg-kemenag-700 text-white font-bold py-2.5 rounded-xl text-sm transition">Setuju</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Wrapper -->
+  <div id="toast-container" class="no-print fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ==================== CODE & DATA ENGINE (JAVASCRIPT) ==================== -->
+  <script>
+    // DATASET LENGKAP 50 SOAL
+    const questions = [
+      // KATEGORI A: JAM (1-10)
+      { id: 1, category: "Materi Jam (الساعة)", code: "jam", arabic: "الساعة الواحدة تُقال:", options: ["الساعة الثانية", "الساعة الواحدة", "الساعة الثالثة", "الساعة الرابعة"], correctIndex: 1, explanation: "Kata 'الواحدة' (Al-Wahidah) adalah bentuk Isim Fai'l dari 'الواحد' yang berarti 'Satu'. Sehingga 'الساعة الواحدة' menunjukkan 'Jam Satu'. Pilihan lainnya: الثانية (Dua), الثالثة (Tiga), الرابعة (Empat)." },
+      { id: 2, category: "Materi Jam (الساعة)", code: "jam", arabic: "الساعة 02.00 تُقال:", options: ["الساعة الثانية", "الساعة الثالثة", "الساعة الأولى", "الساعة الخامسة"], correctIndex: 0, explanation: "Jam 02.00 dinyatakan dengan 'الساعة الثانية' (As-Sa'atu Ats-Tsaniyah) yang berarti 'Jam Dua'. Pilihan lainnya: الثالثة (Tiga), الأولى (Satu), الخامسة (Lima)." },
+      { id: 3, category: "Materi Jam (الساعة)", code: "jam", arabic: "الساعة 03.30 تُقال:", options: ["الساعة الثالثة إلا ربعًا", "الساعة الثالثة والنصف", "الساعة الرابعة إلا نصفًا", "الساعة الثالثة"], correctIndex: 1, explanation: "Pukul 03.30 dinyatakan dengan 'الساعة الثالثة والنصف' (As-Sa'atu Ats-Tsalitsatu wa An-Nishf). Kata 'النصف' (An-Nishf) berarti setengah jam (30 menit). Huruf 'و' (wa) berarti lebih. Jadi, artinya: Jam tiga lebih setengah jam." },
+      { id: 4, category: "Materi Jam (الساعة)", code: "jam", arabic: "الساعة 04.15 تُقال:", options: ["الساعة الرابعة إلا ربعًا", "الساعة الرابعة وربع", "الساعة الرابعة والنصف", "الساعة الخامسة"], correctIndex: 1, explanation: "Pukul 04.15 dinyatakan dengan 'الساعة الرابعة وربع' (As-Sa'atu Ar-Rabi'atu wa Rub'un). Kata 'الربع' (Ar-Rub'u) berarti seperempat jam (15 menit) dan kata hubung 'و' berarti 'lebih'. Jadi, Jam 4 lebih seperempat." },
+      { id: 5, category: "Materi Jam (الساعة)", code: "jam", arabic: "الساعة 05.45 تُقال:", options: ["الساعة السادسة إلا ربعًا", "الساعة الخامسة وربع", "الساعة الخامسة والنصف", "الساعة السادسة"], correctIndex: 0, explanation: "Pukul 05.45 sama dengan pukul 06 kurang 15 menit. Dalam bahasa Arab diungkapkan 'الساعة السادسة إلا ربعًا' (As-Sa'atu As-Sadisatu illa Rub'an). Kata 'إلا' (Illa) berarti 'Kurang' dan 'ربعًا' berarti 'Seperempat'." },
+      { id: 6, category: "Materi Jam (الساعة)", code: "jam", arabic: "الساعة 06.30 تُقال:", options: ["الساعة السادسة إلا نصفًا", "الساعة السادسة والنصف", "الساعة السابعة", "الساعة السادسة وربع"], correctIndex: 1, explanation: "Pukul 06.30 dinyatakan dengan 'الساعة السادسة والنصف' (As-Sa'atu As-Sadisatu wa An-Nishf). Jam enam (السادسة) lebih (و) setengah (النصف)." },
+      { id: 7, category: "Materi Jam (الساعة)", code: "jam", arabic: "الساعة 07.15 تُقال:", options: ["الساعة السابعة وربع", "الساعة السابعة والنصف", "الساعة السابعة إلا ربعًا", "الساعة الثامنة"], correctIndex: 0, explanation: "Pukul 07.15 dinyatakan dengan 'الساعة السابعة وربع' (As-Sa'atu As-Sabi'atu wa Rub'un). Jam tujuh (السابعة) lebih (و) seperempat (ربع)." },
+      { id: 8, category: "Materi Jam (الساعة)", code: "jam", arabic: "الساعة 08.45 تُقال:", options: ["الساعة التاسعة إلا ربعًا", "الساعة الثامنة وربع", "الساعة الثامنة والنصف", "الساعة التاسعة"], correctIndex: 0, explanation: "Pukul 08.45 sama dengan Jam 9 kurang seperempat (15 menit). Dalam bahasa Arab: 'الساعة التاسعة إلا ربعًا' (As-Sa'atu At-Tasi'atu illa Rub'an)." },
+      { id: 9, category: "Materi Jam (الساعة)", code: "jam", arabic: "الساعة 09.00 تُقال:", options: ["الساعة التاسعة", "الساعة العاشرة", "الساعة الثامنة", "الساعة السابعة"], correctIndex: 0, explanation: "Jam 09.00 tepat dinyatakan dengan 'الساعة التاسعة' (As-Sa'atu At-Tasi'ah) yang berarti 'Jam Sembilan'." },
+      { id: 10, category: "Materi Jam (الساعة)", code: "jam", arabic: "الساعة 10.30 تُقال:", options: ["الساعة العاشرة وربع", "الساعة العاشرة والنصف", "الساعة الحادية عشرة", "الساعة التاسعة"], correctIndex: 1, explanation: "Pukul 10.30 dinyatakan dengan 'الساعة العاشرة والنصف' (As-Sa'atu Al-'Asyiratu wa An-Nishf). Jam sepuluh (العاشرة) lebih (و) setengah (النصف)." },
+
+      // KATEGORI B: AKTIVITAS HARIAN (11-20)
+      { id: 11, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أستيقظُ من النوم تعني:", options: ["Saya makan", "Saya tidur", "Saya bangun tidur", "Saya belajar"], correctIndex: 2, explanation: "Kata 'أَسْتَيْقِظُ' (Astayqizhu) berarti 'Saya bangun' dan 'مِنَ النَّوْمِ' (minan-naum) berarti 'dari tidur'." },
+      { id: 12, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أذهب إلى المدرسة تعني:", options: ["Saya pulang", "Saya pergi ke sekolah", "Saya makan", "Saya bermain"], correctIndex: 1, explanation: "Kata 'أَذْهَبُ' (Adzhabu) berarti 'Saya pergi', 'إِلَى' (ila) berarti 'ke', dan 'الْمَدْرَسَةِ' (al-madrasah) berarti 'sekolah'." },
+      { id: 13, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أدرس في الفصل تعني:", options: ["Saya tidur", "Saya belajar di kelas", "Saya bermain", "Saya makan"], correctIndex: 1, explanation: "Kata 'أَدْرُسُ' (Adrusu) berarti 'Saya belajar', 'فِي' (fi) berarti 'di', dan 'الْفَصْلِ' (al-fasl) berarti 'kelas'." },
+      { id: 14, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أكتب الدرس تعني:", options: ["Saya membaca pelajaran", "Saya menulis pelajaran", "Saya mendengar", "Saya makan"], correctIndex: 1, explanation: "Kata 'أَكْتُبُ' (Aktubu) berarti 'Saya menulis' dan 'الدَّرْسَ' (ad-dars) berarti 'pelajaran'." },
+      { id: 15, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أقرأ الكتاب تعني:", options: ["Saya membaca buku", "Saya menulis buku", "Saya membeli buku", "Saya menjual buku"], correctIndex: 0, explanation: "Kata 'أَقْرَأُ' (Aqra'u) berarti 'Saya membaca' dan 'الْكِتَابَ' (al-kitab) berarti 'buku'." },
+      { id: 16, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أتناول الطعام تعني:", options: ["Saya minum", "Saya makan", "Saya tidur", "Saya bermain"], correctIndex: 1, explanation: "Frasa 'أَتَنَاوَلُ الطَّعَامَ' (Atanawalu ath-tha'am) secara istilah berarti 'Saya makan' atau 'Saya mengonsumsi hidangan'." },
+      { id: 17, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أعود إلى البيت تعني:", options: ["Saya pergi", "Saya pulang ke rumah", "Saya makan", "Saya belajar"], correctIndex: 1, explanation: "Kata 'أَعُودُ' (A'udu) berarti 'Saya kembali/pulang', 'إِلَى البيت' (ilal-bait) berarti 'ke rumah'." },
+      { id: 18, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أنام في الليل تعني:", options: ["Saya makan malam", "Saya tidur di malam hari", "Saya belajar", "Saya bermain"], correctIndex: 1, explanation: "Kata 'أَنَامُ' (Anamu) berarti 'Saya tidur', 'فِي اللَّيْلِ' (fil-layl) berarti 'di malam hari'." },
+      { id: 19, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "ألعب مع الأصدقاء تعني:", options: ["Saya belajar", "Saya bermain dengan teman", "Saya makan", "Saya tidur"], correctIndex: 1, explanation: "Kata 'أَلْعَبُ' (Al'abu) berarti 'Saya bermain', 'مَعَ' (ma'a) berarti 'dengan/bersama', dan 'الْأَصْدِقَاءِ' (al-ashdiqa') berarti 'teman-teman'." },
+      { id: 20, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أساعد والدي تعني:", options: ["Saya membantu orang tua", "Saya makan", "Saya tidur", "Saya bermain"], correctIndex: 0, explanation: "Kata 'أُسَاعِدُ' (Usa'idu) berarti 'Saya membantu' dan 'وَالِدِي' (walidi) berarti 'orang tua saya' atau 'ayah saya'." },
+
+      // KATEGORI C: KOSAKATA (21-30)
+      { id: 21, category: "Kosakata (المفردات)", code: "kosakata", arabic: "مدرسة artinya:", options: ["Rumah", "Sekolah", "Pasar", "Masjid"], correctIndex: 1, explanation: "Kata 'مَدْرَسَةٌ' (Madrasah) diserap langsung ke dalam bahasa Indonesia menjadi 'Madrasah' yang bermakna 'Sekolah'." },
+      { id: 22, category: "Kosakata (المفردات)", code: "kosakata", arabic: "كتاب artinya:", options: ["Pena", "Buku", "Meja", "Kursi"], correctIndex: 1, explanation: "Kata 'كِتَابٌ' (Kitab) bermakna 'Buku' atau sesuatu yang tertulis." },
+      { id: 23, category: "Kosakata (المفردات)", code: "kosakata", arabic: "قلم artinya:", options: ["Pensil", "Buku", "Pulpen", "Meja"], correctIndex: 2, explanation: "Kata 'قَلَمٌ' (Qalam) berarti alat tulis tinta atau 'Pulpen/Pena'." },
+      { id: 24, category: "Kosakata (المفردات)", code: "kosakata", arabic: "معلم artinya:", options: ["Siswa", "Guru", "Kepala sekolah", "Teman"], correctIndex: 1, explanation: "Kata 'مُعَلِّمٌ' (Mu'allim) berasal dari kata 'allama (mengajar) yang merujuk kepada orang yang mengajar, yaitu 'Guru'." },
+      { id: 25, category: "Kosakata (المفردات)", code: "kosakata", arabic: "طالب artinya:", options: ["Guru", "Siswa", "Kepala sekolah", "Ayah"], correctIndex: 1, explanation: "Kata 'طَالِبٌ' (Thalib) berarti pencari (ilmu), dalam dunia pendidikan diterjemahkan sebagai 'Siswa/Murid'." },
+      { id: 26, category: "Kosakata (المفردات)", code: "kosakata", arabic: "بيت artinya:", options: ["Sekolah", "Rumah", "Pasar", "Jalan"], correctIndex: 1, explanation: "Kata 'بَيْتٌ' (Bait) berarti tempat berteduh atau 'Rumah'." },
+      { id: 27, category: "Kosakata (المفردات)", code: "kosakata", arabic: "مسجد artinya:", options: ["Rumah", "Sekolah", "Masjid", "Pasar"], correctIndex: 2, explanation: "Kata 'مَسْجِدٌ' (Masjid) adalah tempat sujud bagi umat Islam untuk beribadah." },
+      { id: 28, category: "Kosakata (المفردات)", code: "kosakata", arabic: "سوق artinya:", options: ["Pasar", "Sekolah", "Rumah", "Masjid"], correctIndex: 0, explanation: "Kata 'سُوْقٌ' (Suq) merujuk pada tempat transaksi jual-beli, yaitu 'Pasar'." },
+      { id: 29, category: "Kosakata (المفردات)", code: "kosakata", arabic: "طعام artinya:", options: ["Minuman", "Makanan", "Buku", "Pena"], correctIndex: 1, explanation: "Kata 'طَعَامٌ' (Tha'am) berarti bahan konsumsi atau 'Makanan'." },
+      { id: 30, category: "Kosakata (المفردات)", code: "kosakata", arabic: "ماء artinya:", options: ["Air", "Api", "Tanah", "Angin"], correctIndex: 0, explanation: "Kata 'مَاءٌ' (Ma') merupakan zat cair yang vital untuk kehidupan, yaitu 'Air'." },
+
+      // KATEGORI D: KALIMAT SEDERHANA (31-40)
+      { id: 31, category: "Kalimat Sederhana", code: "kalimat", arabic: "أنا طالب تعني:", options: ["Saya guru", "Saya siswa", "Saya ayah", "Saya ibu"], correctIndex: 1, explanation: "'أَنَا' (Ana) berarti kata ganti orang pertama tunggal 'Saya', dan 'طَالِبٌ' (Thalib) berarti 'Siswa'." },
+      { id: 32, category: "Kalimat Sederhana", code: "kalimat", arabic: "هو معلم artinya:", options: ["Dia siswa", "Dia guru", "Dia ayah", "Dia teman"], correctIndex: 1, explanation: "'هُوَ' (Huwa) adalah dhomir mufrad mudzakkar (Dia - Laki-laki) tunggal, dan 'مُعَلِّمٌ' (Mu'allim) adalah 'Guru'." },
+      { id: 33, category: "Kalimat Sederhana", code: "kalimat", arabic: "هي طالبة artinya:", options: ["Dia laki-laki", "Dia perempuan siswa", "Dia guru", "Dia ayah"], correctIndex: 1, explanation: "'هِيَ' (Hiya) adalah dhomir mufrad muannats (Dia - Perempuan) tunggal, ditandai dengan isim 'طَالِبَةٌ' yang berakhiran Ta' Marbuthah (Siswa Perempuan)." },
+      { id: 34, category: "Kalimat Sederhana", code: "kalimat", arabic: "نحن ندرس artinya:", options: ["Kami bermain", "Kami belajar", "Kami makan", "Kami tidur"], correctIndex: 1, explanation: "'نَحْنُ' (Nahnu) adalah kata ganti 'Kami/Kita', diikuti fi'il mudhori' 'نَدْرُسُ' (nadrusu) yang diawali huruf mudhara'ah Nun (ن) yang berati 'belajar'." },
+      { id: 35, category: "Kalimat Sederhana", code: "kalimat", arabic: "هم يذهبون artinya:", options: ["Mereka pergi", "Mereka makan", "Mereka tidur", "Mereka belajar"], correctIndex: 0, explanation: "'هُمْ' (Hum) adalah kata ganti orang ketiga jamak laki-laki 'Mereka', diikuti fi'il mudhori' 'يَذْهَبُوْنَ' (Yadzhabuna) yang berakhiran Wau dan Nun yang berarti 'Pergi'." },
+      { id: 36, category: "Kalimat Sederhana", code: "kalimat", arabic: "أنا أكتب artinya:", options: ["Saya membaca", "Saya menulis", "Saya makan", "Saya tidur"], correctIndex: 1, explanation: "Subjek 'أَنَا' (Saya) memiliki keselarasan dengan kata kerja mudhori' 'أَكْتُبُ' (Aktubu) yang diawali huruf mudhara'ah Alif (أ) yang berarti 'menulis'." },
+      { id: 37, category: "Kalimat Sederhana", code: "kalimat", arabic: "أنت تلعب artinya:", options: ["Kamu bermain", "Kamu tidur", "Kamu makan", "Kamu belajar"], correctIndex: 0, explanation: "'أَنْتَ' (Anta) adalah dhomir mukhathab tunggal (Kamu - Laki-laki), diselaraskan dengan kata kerja mudhori' 'تَلْعَبُ' (Tal'abu) diawali huruf mudhara'ah Ta (ت) yang berarti 'bermain'." },
+      { id: 38, category: "Kalimat Sederhana", code: "kalimat", arabic: "هو يقرأ artinya:", options: ["Dia menulis", "Dia membaca", "Dia makan", "Dia tidur"], correctIndex: 1, explanation: "'هُوَ' (Dia Laki-laki) bersanding dengan fi'il mudhori' 'يَقْرَأُ' (yaqra'u) yang diawali huruf Ya (ي) yang berarti 'membaca'." },
+      { id: 39, category: "Kalimat Sederhana", code: "kalimat", arabic: "نحن نأكل artinya:", options: ["Kami makan", "Kami tidur", "Kami belajar", "Kami bermain"], correctIndex: 0, explanation: "'نَحْنُ' (Kami) dipasangkan dengan kata kerja mudhori' 'نَأْكُلُ' (na'kulu) diawali huruf Nun (ن) yang berarti 'makan'." },
+      { id: 40, category: "Kalimat Sederhana", code: "kalimat", arabic: "هي تنام artinya:", options: ["Dia makan", "Dia tidur", "Dia belajar", "Dia bermain"], correctIndex: 1, explanation: "'هِيَ' (Dia Perempuan) berpasangan dengan kata kerja mudhori' 'تَنَامُ' (Tanamu) yang menggunakan awalan Ta (ت) yang bermakna 'tidur'." },
+
+      // KATEGORI E: CAMPURAN (41-50)
+      { id: 41, category: "Campuran", code: "campuran", arabic: "أنا أذهب إلى المدرسة في الساعة...", options: ["الليل", "الصباح", "المساء", "المغرب"], correctIndex: 1, explanation: "Kalimat ini bermakna: 'Saya pergi ke sekolah pada pukul...'. Pilihan yang rasional adalah 'الصباح' (As-Shabah) yang berarti 'Pagi hari'." },
+      { id: 42, category: "Campuran", code: "campuran", arabic: "أتناول الطعام في...", options: ["المدرسة", "البيت", "السوق", "المسجد"], correctIndex: 1, explanation: "Kalimat bermakna: 'Saya menyantap makanan di...'. Secara umum aktivitas harian bersantap dilakukan di 'الْبَيْت' (Al-Bait) yang berarti 'Rumah'." },
+      { id: 43, category: "Campuran", code: "campuran", arabic: "أدرس في...", options: ["السوق", "المدرسة", "البيت", "المسجد"], correctIndex: 1, explanation: "Kalimat ini bermakna: 'Saya belajar di...'. Institusi akademik formal utama untuk belajar adalah 'الْمَدْرَسَةِ' (Al-Madrasah) yang berarti 'Sekolah'." },
+      { id: 44, category: "Campuran", code: "campuran", arabic: "أنام في...", options: ["الصباح", "الليل", "العصر", "الظهر"], correctIndex: 1, explanation: "Kalimat ini bermakna: 'Saya tidur pada waktu...'. Waktu istirahat tidur utama dalam siklus harian adalah 'الَّيْل' (Al-Layl) yang berarti 'Malam hari'." },
+      { id: 45, category: "Campuran", code: "campuran", arabic: "ألعب مع...", options: ["الكتاب", "القلم", "الأصدقاء", "المدرسة"], correctIndex: 2, explanation: "Kalimat bermakna: 'Saya bermain bersama...'. Objek interaksi sosial yang tepat untuk bermain adalah 'الْأَصْدِقَاءِ' (Al-Ashdiqa') yang berarti 'Teman-teman'." },
+      { id: 46, category: "Campuran", code: "campuran", arabic: "أكتب بـ...", options: ["الكتاب", "القلم", "المدرسة", "البيت"], correctIndex: 1, explanation: "Kalimat bermakna: 'Saya menulis dengan menggunakan...'. Partikel 'بِـ' (bi) berarti 'dengan/menggunakan' alat tulis yang sesuai yaitu 'الْقَلَمِ' (Al-Qalam) yang berarti 'Pena'." },
+      { id: 47, category: "Campuran", code: "campuran", arabic: "أقرأ في...", options: ["القلم", "الكتاب", "البيت", "السوق"], correctIndex: 1, explanation: "Kalimat bermakna: 'Saya membaca di dalam/dari...'. Media bacaan yang sesuai adalah 'الْكِتَابِ' (Al-Kitab) yang bermakna 'Buku'." },
+      { id: 48, category: "Campuran", code: "campuran", arabic: "أذهب إلى المسجد للصلاة في...", options: ["الليل", "الصباح", "الظهر", "السوق"], correctIndex: 2, explanation: "Kalimat bermakna: 'Saya pergi ke masjid untuk salat pada waktu...'. Sesuai pilihan kunci jawaban, salat fardhu siang hari adalah 'الظُّهْر' (Azh-Zhuhr) yang berarti 'Zuhur'." },
+      { id: 49, category: "Campuran", code: "campuran", arabic: "أستيقظ في...", options: ["الليل", "الصباح", "المساء", "العصر"], correctIndex: 1, explanation: "Kalimat bermakna: 'Saya bangun tidur pada waktu...'. Bangun tidur untuk memulai aktivitas harian normal adalah pada pagi hari 'الصَّبَاح' (As-Shabah)." },
+      { id: 50, category: "Campuran", code: "campuran", arabic: "أعود إلى البيت في...", options: ["المدرسة", "السوق", "المساء", "القلم"], correctIndex: 2, explanation: "Kalimat bermakna: 'Saya pulang ke rumah pada...'. Pilihan keterangan waktu yang tepat adalah 'الْمَسَاء' (Al-Masa') yang bermakna 'Sore/Malam hari'." }
+    ];
+
+    // DATASET KAMUS MINI
+    const kamusData = [
+      { arab: "الساعة", translit: "As-Sa'ah", indo: "Jam / Waktu", jenis: "Waktu" },
+      { arab: "الواحدة", translit: "Al-Wahidah", indo: "Satu (perempuan)", jenis: "Waktu" },
+      { arab: "الثانية", translit: "Ats-Tsaniyah", indo: "Dua (perempuan)", jenis: "Waktu" },
+      { arab: "الثالثة", translit: "Ats-Tsalitsah", indo: "Tiga (perempuan)", jenis: "Waktu" },
+      { arab: "الرابعة", translit: "Ar-Rabi'ah", indo: "Empat (perempuan)", jenis: "Waktu" },
+      { arab: "الخامسة", translit: "Al-Khamisah", indo: "Lima (perempuan)", jenis: "Waktu" },
+      { arab: "السادسة", translit: "As-Sadisah", indo: "Enam (perempuan)", jenis: "Waktu" },
+      { arab: "السابعة", translit: "As-Sabi'ah", indo: "Tujuh (perempuan)", jenis: "Waktu" },
+      { arab: "الثامنة", translit: "Ats-Tsaminah", indo: "Delapan (perempuan)", jenis: "Waktu" },
+      { arab: "التاسعة", translit: "At-Tasi'ah", indo: "Sembilan (perempuan)", jenis: "Waktu" },
+      { arab: "العاشرة", translit: "Al-'Asyirah", indo: "Sepuluh (perempuan)", jenis: "Waktu" },
+      { arab: "النصف", translit: "An-Nishf", indo: "Setengah (30 Menit)", jenis: "Waktu" },
+      { arab: "الربع", translit: "Ar-Rub'u", indo: "Seperempat (15 Menit)", jenis: "Waktu" },
+      { arab: "إلا", translit: "Illa", indo: "Kurang", jenis: "Waktu" },
+      { arab: "أستيقظ", translit: "Astayqizhu", indo: "Saya bangun tidur", jenis: "Aktivitas" },
+      { arab: "أذهب", translit: "Adzhabu", indo: "Saya pergi", jenis: "Aktivitas" },
+      { arab: "أدرس", translit: "Adrusu", indo: "Saya belajar", jenis: "Aktivitas" },
+      { arab: "أكتب", translit: "Aktubu", indo: "Saya menulis", jenis: "Aktivitas" },
+      { arab: "أقرأ", translit: "Aqra'u", indo: "Saya membaca", jenis: "Aktivitas" },
+      { arab: "أتناول الطعام", translit: "Atanawalu ath-tha'am", indo: "Saya makan / bersantap", jenis: "Aktivitas" },
+      { arab: "أعود", translit: "A'udu", indo: "Saya pulang / kembali", jenis: "Aktivitas" },
+      { arab: "أنام", translit: "Anamu", indo: "Saya tidur", jenis: "Aktivitas" },
+      { arab: "ألعب", translit: "Al'abu", indo: "Saya bermain", jenis: "Aktivitas" },
+      { arab: "أساعد", translit: "Usa'idu", indo: "Saya membantu", jenis: "Aktivitas" },
+      { arab: "مدرسة", translit: "Madrasah", indo: "Sekolah", jenis: "Benda" },
+      { arab: "بيت", translit: "Bait", indo: "Rumah", jenis: "Benda" },
+      { arab: "كتاب", translit: "Kitab", indo: "Buku", jenis: "Benda" },
+      { arab: "قلم", translit: "Qalam", indo: "Pena / Pulpen", jenis: "Benda" },
+      { arab: "مسجد", translit: "Masjid", indo: "Masjid", jenis: "Benda" },
+      { arab: "سوق", translit: "Suq", indo: "Pasar", jenis: "Benda" },
+      { arab: "أنا", translit: "Ana", indo: "Saya", jenis: "Subjek" },
+      { arab: "أنت", translit: "Anta", indo: "Kamu (Laki-laki)", jenis: "Subjek" },
+      { arab: "هو", translit: "Huwa", indo: "Dia (Laki-laki)", jenis: "Subjek" },
+      { arab: "هي", translit: "Hiya", indo: "Dia (Perempuan)", jenis: "Subjek" },
+      { arab: "نحن", translit: "Nahnu", indo: "Kami / Kita", jenis: "Subjek" },
+      { arab: "هم", translit: "Hum", indo: "Mereka", jenis: "Subjek" }
+    ];
+
+    // STATE MANAGEMENT APLIKASI
+    let activeTab = "dashboard";
+    
+    // State Mode Belajar
+    let filteredPracticeQuestions = [...questions];
+    let currentPracticeIndex = 0;
+    let practiceAnswers = Array(50).fill(null); // Menyimpan status benarsalah user (true/false)
+
+    // State Mode Ujian
+    let examActive = false;
+    let currentExamIndex = 0;
+    let examUserAnswers = Array(50).fill(null); // Menyimpan index opsi terpilih (0,1,2,3)
+    let examFlags = Array(50).fill(false); // Penanda ragu-ragu
+    let examTimerInterval = null;
+    let examSecondsRemaining = 90 * 60; // 90 Menit
+
+    // ONLOAD HANDLER
+    window.onload = function() {
+      // Load best score from local storage
+      const savedScore = localStorage.getItem('pas_arabic_best_score');
+      if(savedScore) {
+        document.getElementById('best-score').innerText = savedScore + "/100";
+        document.getElementById('completion-status').innerText = "Sudah Menyelesaikan Ujian";
+        document.getElementById('completion-status').classList.remove('text-gray-800');
+        document.getElementById('completion-status').classList.add('text-kemenag-600', 'font-bold');
+      }
+
+      // Initialize UI Components
+      initPracticeGrid();
+      loadPracticeQuestion();
+      initKamus();
+      initPrintView();
+    };
+
+    // TAB NAVIGATION
+    function switchTab(tabId) {
+      if (examActive && tabId !== 'ujian') {
+        showModal(
+          "Ujian Sedang Berjalan!",
+          "Meninggalkan tab ini akan menghentikan sementara timer ujian Anda. Apakah Anda yakin ingin beralih tab?",
+          "Ya, Alihkan",
+          function() {
+            pauseExamTimer();
+            performTabSwitch(tabId);
+          }
+        );
+      } else {
+        if (examActive && tabId === 'ujian') {
+          resumeExamTimer();
+        }
+        performTabSwitch(tabId);
+      }
+    }
+
+    function performTabSwitch(tabId) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      // Show targeted tab
+      document.getElementById(`content-${tabId}`).classList.remove('hidden');
+
+      // Update Nav buttons styling
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.className = "tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 text-gray-200 hover:text-white hover:bg-white/10";
+      });
+      document.getElementById(`tab-${tabId}`).className = "tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 bg-white text-kemenag-800 shadow";
+      
+      activeTab = tabId;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==================== ENGINE 1: MODE BELAJAR ====================
+    function initPracticeGrid() {
+      const container = document.getElementById('practice-grid-container');
+      container.innerHTML = "";
+      
+      questions.forEach((q, index) => {
+        const btn = document.createElement('button');
+        btn.id = `practice-grid-${index}`;
+        btn.className = "w-10 h-10 font-bold text-xs rounded-xl flex items-center justify-center border transition-all duration-150 bg-gray-100 hover:bg-gray-200 border-gray-200 text-gray-700";
+        btn.innerText = q.id;
+        btn.onclick = () => jumpToPractice(index);
+        container.appendChild(btn);
+      });
+    }
+
+    function jumpToPractice(index) {
+      // Find position of this global index inside filtered set
+      const targetQuestion = questions[index];
+      const filteredIndex = filteredPracticeQuestions.findIndex(q => q.id === targetQuestion.id);
+      
+      if (filteredIndex !== -1) {
+        currentPracticeIndex = filteredIndex;
+        loadPracticeQuestion();
+      } else {
+        showToast("Soal di luar filter kategori saat ini!", "warning");
+      }
+    }
+
+    function loadPracticeQuestion() {
+      if(filteredPracticeQuestions.length === 0) return;
+      
+      const q = filteredPracticeQuestions[currentPracticeIndex];
+      const globalIndex = questions.findIndex(item => item.id === q.id);
+
+      // Update Labels
+      document.getElementById('practice-category-label').innerText = q.category;
+      document.getElementById('practice-number-label').innerText = `Soal ${currentPracticeIndex + 1} dari ${filteredPracticeQuestions.length} (Soal No. ${q.id})`;
+      document.getElementById('practice-question-arabic').innerText = q.arabic;
+      
+      // Update Progress Bar
+      const progressPercent = ((currentPracticeIndex + 1) / filteredPracticeQuestions.length) * 100;
+      document.getElementById('practice-progress-bar').style.width = `${progressPercent}%`;
+
+      // Render Options
+      const optionsContainer = document.getElementById('practice-options-container');
+      optionsContainer.innerHTML = "";
+
+      const optionPrefix = ["A", "B", "C", "D"];
+      q.options.forEach((opt, idx) => {
+        const isCorrect = idx === q.correctIndex;
+        const btn = document.createElement('button');
+        btn.id = `practice-opt-${idx}`;
+        btn.className = "w-full text-left p-4 rounded-xl border border-gray-200 hover:border-kemenag-300 hover:bg-kemenag-50/10 flex items-center gap-3 transition-all duration-150 text-xs sm:text-sm";
+        
+        // Circular badge inside option
+        const badge = document.createElement('span');
+        badge.id = `practice-opt-badge-${idx}`;
+        badge.className = "w-7 h-7 bg-gray-100 text-gray-600 rounded-full font-bold flex items-center justify-center shrink-0 border border-gray-200";
+        badge.innerText = optionPrefix[idx];
+        btn.appendChild(badge);
+
+        const textSpan = document.createElement('span');
+        textSpan.id = `practice-opt-text-${idx}`;
+        textSpan.className = "font-medium text-gray-700";
+        textSpan.innerText = opt;
+        btn.appendChild(textSpan);
+
+        // Option Action
+        btn.onclick = () => evaluatePracticeChoice(idx, isCorrect);
+        optionsContainer.appendChild(btn);
+      });
+
+      // Update Prev Button
+      document.getElementById('btn-practice-prev').disabled = currentPracticeIndex === 0;
+
+      // Handle Explanation Box Reset
+      document.getElementById('practice-explanation-box').classList.add('hidden');
+      document.getElementById('btn-practice-explain').classList.add('hidden');
+
+      // Sync active state in the grid map
+      document.querySelectorAll('[id^="practice-grid-"]').forEach(el => {
+        el.classList.remove('ring-4', 'ring-kemenag-600/30', 'border-kemenag-600', 'scale-105');
+      });
+      const gridBtn = document.getElementById(`practice-grid-${globalIndex}`);
+      if(gridBtn) {
+        gridBtn.classList.add('ring-4', 'ring-kemenag-600/30', 'border-kemenag-600', 'scale-105');
+      }
+    }
+
+    function evaluatePracticeChoice(idx, isCorrect) {
+      const q = filteredPracticeQuestions[currentPracticeIndex];
+      const globalIndex = questions.findIndex(item => item.id === q.id);
+
+      // Lock buttons to prevent multiple clicks
+      q.options.forEach((_, optIdx) => {
+        const optBtn = document.getElementById(`practice-opt-${optIdx}`);
+        optBtn.onclick = null; // Disable click
+        
+        const badge = document.getElementById(`practice-opt-badge-${optIdx}`);
+        const textSpan = document.getElementById(`practice-opt-text-${optIdx}`);
+
+        if (optIdx === q.correctIndex) {
+          // Highlight correct answer in Green
+          optBtn.className = "w-full text-left p-4 rounded-xl border border-green-200 bg-green-50/50 flex items-center gap-3 transition-all duration-150 text-xs sm:text-sm";
+          badge.className = "w-7 h-7 bg-green-600 text-white rounded-full font-bold flex items-center justify-center shrink-0";
+          badge.innerHTML = '<i class="fa-solid fa-check"></i>';
+          textSpan.className = "font-bold text-green-800";
+        } else if (optIdx === idx) {
+          // Highlight wrong user selection in Red
+          optBtn.className = "w-full text-left p-4 rounded-xl border border-red-200 bg-red-50/50 flex items-center gap-3 transition-all duration-150 text-xs sm:text-sm";
+          badge.className = "w-7 h-7 bg-red-600 text-white rounded-full font-bold flex items-center justify-center shrink-0";
+          badge.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+          textSpan.className = "font-bold text-red-800";
+        } else {
+          optBtn.className = "w-full text-left p-4 rounded-xl border border-gray-100 bg-gray-50/30 opacity-60 flex items-center gap-3 text-xs sm:text-sm";
+        }
+      });
+
+      // Save answer state in grid map
+      practiceAnswers[globalIndex] = isCorrect;
+      const gridBtn = document.getElementById(`practice-grid-${globalIndex}`);
+      if(gridBtn) {
+        gridBtn.className = `w-10 h-10 font-bold text-xs rounded-xl flex items-center justify-center border transition-all duration-150 ${isCorrect ? 'bg-green-600 text-white border-green-600' : 'bg-red-500 text-white border-red-500'}`;
+      }
+
+      // Update progress counter
+      const answeredCount = practiceAnswers.filter(v => v !== null).length;
+      document.getElementById('practice-answered-count').innerText = `${answeredCount}/50 Selesai`;
+
+      // Show Explanation Box
+      document.getElementById('practice-explanation-text').innerText = q.explanation;
+      document.getElementById('practice-explanation-box').classList.remove('hidden');
+      document.getElementById('btn-practice-explain').classList.remove('hidden');
+
+      if (isCorrect) {
+        showToast(" ممتاز ! (Luar Biasa, Jawaban Benar)", "success");
+      } else {
+        showToast(" خطأ ! (Maaf, Jawaban Kurang Tepat)", "error");
+      }
+    }
+
+    function prevPractice() {
+      if(currentPracticeIndex > 0) {
+        currentPracticeIndex--;
+        loadPracticeQuestion();
+      }
+    }
+
+    function nextPractice() {
+      if(currentPracticeIndex < filteredPracticeQuestions.length - 1) {
+        currentPracticeIndex++;
+        loadPracticeQuestion();
+      } else {
+        showToast("Anda telah mencapai akhir latihan dalam kategori ini!", "info");
+      }
+    }
+
+    function filterPracticeQuestions() {
+      const val = document.getElementById('practice-filter').value;
+      if (val === 'all') {
+        filteredPracticeQuestions = [...questions];
+      } else {
+        filteredPracticeQuestions = questions.filter(q => q.code === val);
+      }
+      currentPracticeIndex = 0;
+      loadPracticeQuestion();
+    }
+
+    function resetPractice() {
+      showModal(
+        "Reset Progres Latihan?",
+        "Semua koreksi benarsalah pada peta soal latihan Anda saat ini akan dibersihkan kembali ke semula.",
+        "Ya, Bersihkan",
+        function() {
+          practiceAnswers = Array(50).fill(null);
+          document.getElementById('practice-answered-count').innerText = "0/50 Selesai";
+          initPracticeGrid();
+          filterPracticeQuestions();
+          showToast("Progres latihan berhasil di-reset!", "info");
+        }
+      );
+    }
+
+    function revealExplanation() {
+      const box = document.getElementById('practice-explanation-box');
+      box.classList.toggle('hidden');
+      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Text to speech Arab pelafalan
+    function speakArabic() {
+      const arabicText = document.getElementById('practice-question-arabic').innerText;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // Stop any pending speech
+        const utterance = new SpeechSynthesisUtterance(arabicText);
+        utterance.lang = 'ar-SA';
+        utterance.rate = 0.85; // slightly slower for educational purposes
+        window.speechSynthesis.speak(utterance);
+      } else {
+        showToast("Peramban Anda tidak mendukung fitur pelafalan suara (TTS).", "warning");
+      }
+    }
+
+
+    // ==================== ENGINE 2: SIMULASI UJIAN (CBT) ====================
+    function startExam() {
+      examActive = true;
+      currentExamIndex = 0;
+      examUserAnswers = Array(50).fill(null);
+      examFlags = Array(50).fill(false);
+      examSecondsRemaining = 90 * 60; // Reset 90 Menit
+
+      // UI Swapping
+      document.getElementById('exam-welcome').classList.add('hidden');
+      document.getElementById('exam-results').classList.add('hidden');
+      document.getElementById('exam-panel').classList.remove('hidden');
+
+      // Setup Exam Map
+      initExamGrid();
+      loadExamQuestion();
+      startExamTimer();
+      
+      showToast("Selamat mengerjakan! Semoga sukses.", "success");
+    }
+
+    function initExamGrid() {
+      const container = document.getElementById('exam-grid-container');
+      container.innerHTML = "";
+
+      questions.forEach((q, index) => {
+        const btn = document.createElement('button');
+        btn.id = `exam-grid-${index}`;
+        btn.className = "w-10 h-10 font-bold text-xs rounded-xl flex items-center justify-center border transition-all duration-150 bg-gray-100 border-gray-200 text-gray-700 hover:bg-gray-200";
+        btn.innerText = q.id;
+        btn.onclick = () => jumpToExamQuestion(index);
+        container.appendChild(btn);
+      });
+    }
+
+    function loadExamQuestion() {
+      const q = questions[currentExamIndex];
+
+      // Update Headers
+      document.getElementById('exam-section-badge').innerText = q.category;
+      document.getElementById('exam-question-arabic').innerText = q.arabic;
+
+      // Update Progress Bar
+      const answeredCount = examUserAnswers.filter(v => v !== null).length;
+      const progressPercent = (answeredCount / 50) * 100;
+      document.getElementById('exam-progress-bar').style.width = `${progressPercent}%`;
+      document.getElementById('exam-progress-counter').innerText = `${answeredCount}/50 Terisi`;
+
+      // Options Rendering
+      const container = document.getElementById('exam-options-container');
+      container.innerHTML = "";
+
+      const optionPrefix = ["A", "B", "C", "D"];
+      q.options.forEach((opt, idx) => {
+        const isSelected = examUserAnswers[currentExamIndex] === idx;
+        const btn = document.createElement('button');
+        btn.className = `w-full text-left p-4 rounded-xl border flex items-center gap-3 transition-all duration-150 text-xs sm:text-sm ${
+          isSelected 
+            ? 'border-kemenag-600 bg-kemenag-50/30' 
+            : 'border-gray-200 hover:border-kemenag-200 hover:bg-kemenag-50/10'
+        }`;
+        
+        const badge = document.createElement('span');
+        badge.className = `w-7 h-7 rounded-full font-bold flex items-center justify-center shrink-0 border ${
+          isSelected 
+            ? 'bg-kemenag-600 text-white border-kemenag-600' 
+            : 'bg-gray-100 text-gray-600 border-gray-200'
+        }`;
+        badge.innerText = optionPrefix[idx];
+        btn.appendChild(badge);
+
+        const textSpan = document.createElement('span');
+        textSpan.className = `font-medium ${isSelected ? 'text-kemenag-900 font-bold' : 'text-gray-700'}`;
+        textSpan.innerText = opt;
+        btn.appendChild(textSpan);
+
+        btn.onclick = () => selectExamAnswer(idx);
+        container.appendChild(btn);
+      });
+
+      // Controls State
+      document.getElementById('btn-exam-prev').disabled = currentExamIndex === 0;
+      document.getElementById('btn-exam-next').innerText = currentExamIndex === 49 ? "Selesai" : "Berikutnya";
+
+      // Flag state sync
+      const flagBtn = document.getElementById('btn-exam-flag');
+      if (examFlags[currentExamIndex]) {
+        flagBtn.className = "text-xs font-semibold px-3 py-1.5 rounded-lg border bg-yellow-50 text-yellow-700 border-yellow-300 flex items-center gap-1.5";
+        flagBtn.innerHTML = '<i class="fa-solid fa-flag"></i> Ragu-ragu (Aktif)';
+      } else {
+        flagBtn.className = "text-xs font-semibold px-3 py-1.5 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 flex items-center gap-1.5";
+        flagBtn.innerHTML = '<i class="fa-regular fa-flag"></i> Ragu-ragu';
+      }
+
+      // Sync active state in navigation grid mapping
+      syncExamGridStyles();
+    }
+
+    function selectExamAnswer(optionIndex) {
+      examUserAnswers[currentExamIndex] = optionIndex;
+      loadExamQuestion(); // re-render options
+    }
+
+    function toggleExamFlag() {
+      examFlags[currentExamIndex] = !examFlags[currentExamIndex];
+      loadExamQuestion(); // sync view
+    }
+
+    function jumpToExamQuestion(index) {
+      currentExamIndex = index;
+      loadExamQuestion();
+    }
+
+    function prevExamQuestion() {
+      if(currentExamIndex > 0) {
+        currentExamIndex--;
+        loadExamQuestion();
+      }
+    }
+
+    function nextExamQuestion() {
+      if(currentExamIndex < 49) {
+        currentExamIndex++;
+        loadExamQuestion();
+      } else {
+        confirmSubmitExam();
+      }
+    }
+
+    function syncExamGridStyles() {
+      questions.forEach((_, idx) => {
+        const btn = document.getElementById(`exam-grid-${idx}`);
+        if(!btn) return;
+
+        const isAnswered = examUserAnswers[idx] !== null;
+        const isFlagged = examFlags[idx];
+        const isActive = currentExamIndex === idx;
+
+        // Base styles
+        btn.className = "w-10 h-10 font-bold text-xs rounded-xl flex items-center justify-center border transition-all duration-150";
+
+        if (isActive) {
+          btn.classList.add('ring-4', 'ring-kemenag-600/30', 'border-kemenag-600', 'scale-105');
+        }
+
+        if (isFlagged) {
+          btn.classList.add('bg-yellow-500', 'text-white', 'border-yellow-500');
+        } else if (isAnswered) {
+          btn.classList.add('bg-kemenag-600', 'text-white', 'border-kemenag-600');
+        } else {
+          btn.classList.add('bg-gray-100', 'border-gray-200', 'text-gray-700');
+        }
+      });
+    }
+
+    // Timer Engine
+    function startExamTimer() {
+      if(examTimerInterval) clearInterval(examTimerInterval);
+      
+      examTimerInterval = setInterval(() => {
+        if(examSecondsRemaining <= 0) {
+          clearInterval(examTimerInterval);
+          submitExamSilently();
+          showModal(
+            "Waktu Ujian Habis!",
+            "Waktu pengerjaan ujian selama 90 menit telah usai. Hasil pengerjaan Anda otomatis dikirim.",
+            "Lihat Hasil Ujian",
+            null,
+            true // force trigger style without cancel
+          );
+        } else {
+          examSecondsRemaining--;
+          updateTimerDisplay();
+        }
+      }, 1000);
+    }
+
+    function pauseExamTimer() {
+      if(examTimerInterval) clearInterval(examTimerInterval);
+    }
+
+    function resumeExamTimer() {
+      if(examActive) {
+        startExamTimer();
+      }
+    }
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(examSecondsRemaining / 60);
+      const secs = examSecondsRemaining % 60;
+      document.getElementById('exam-timer').innerHTML = `<i class="fa-regular fa-clock text-yellow-500"></i> ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // Submit Actions
+    function confirmSubmitExam() {
+      const unanswered = examUserAnswers.filter(ans => ans === null).length;
+      let modalText = "Apakah Anda yakin ingin menyelesaikan ujian dan mengirim semua berkas jawaban Anda?";
+      if (unanswered > 0) {
+        modalText = `Peringatan: Terdapat ${unanswered} soal yang BELUM ANDA JAWAB. Apakah Anda tetap ingin mengakhiri ujian dan melihat hasilnya?`;
+      }
+
+      showModal(
+        "Selesaikan Ujian Simulasi?",
+        modalText,
+        "Ya, Selesaikan",
+        function() {
+          submitExam();
+        }
+      );
+    }
+
+    function submitExam() {
+      examActive = false;
+      if(examTimerInterval) clearInterval(examTimerInterval);
+
+      // Score Calculation
+      let correctAnswers = 0;
+      let scoreBreakdown = { jam: 0, aktivitas: 0, kosakata: 0, kalimat: 0, campuran: 0 };
+      
+      questions.forEach((q, idx) => {
+        if(examUserAnswers[idx] === q.correctIndex) {
+          correctAnswers++;
+          scoreBreakdown[q.code]++;
+        }
+      });
+
+      const finalScore = (correctAnswers / 50) * 100;
+      
+      // Save best score to local storage
+      const previousBest = parseFloat(localStorage.getItem('pas_arabic_best_score') || '0');
+      if (finalScore > previousBest) {
+        localStorage.setItem('pas_arabic_best_score', finalScore.toFixed(0));
+        document.getElementById('best-score').innerText = finalScore.toFixed(0) + "/100";
+      }
+
+      // Display results card
+      document.getElementById('exam-panel').classList.add('hidden');
+      document.getElementById('exam-results').classList.remove('hidden');
+
+      // Update Results GUI
+      document.getElementById('result-score').innerText = finalScore.toFixed(0);
+      document.getElementById('result-correct').innerText = correctAnswers;
+      document.getElementById('result-wrong').innerText = 50 - correctAnswers;
+
+      const isPassed = finalScore >= 75;
+      const statusEl = document.getElementById('result-status');
+      statusEl.innerText = isPassed ? "LULUS" : "TIDAK LULUS";
+      statusEl.className = `text-lg font-extrabold mt-1.5 ${isPassed ? 'text-green-600' : 'text-red-500'}`;
+
+      const medalContainer = document.getElementById('result-medal-container');
+      if (isPassed) {
+        medalContainer.className = "w-20 h-20 bg-green-50 text-green-600 rounded-full mx-auto flex items-center justify-center text-4xl shadow-inner";
+        medalContainer.innerHTML = '<i class="fa-solid fa-medal"></i>';
+        document.getElementById('result-greeting').innerText = " ممتاز ! Selamat!";
+        document.getElementById('result-subtitle').innerText = "Selamat, nilai Anda melampaui KKM minimum (75). Pertahankan prestasimu!";
+      } else {
+        medalContainer.className = "w-20 h-20 bg-red-50 text-red-500 rounded-full mx-auto flex items-center justify-center text-4xl shadow-inner";
+        medalContainer.innerHTML = '<i class="fa-solid fa-shield-halved"></i>';
+        document.getElementById('result-greeting').innerText = "Cobalah Kembali!";
+        document.getElementById('result-subtitle').innerText = "Nilai Anda belum mencapai KKM minimum (75). Teruslah berlatih, usaha tidak akan mengkhianati hasil.";
+      }
+
+      // Render Breakdown Bars
+      const breakdownContainer = document.getElementById('category-breakdown-container');
+      breakdownContainer.innerHTML = "";
+
+      const categories = [
+        { code: 'jam', name: "A. Materi Jam (الساعة)", max: 10 },
+        { code: 'aktivitas', name: "B. Aktivitas Harian (النشاط اليومي)", max: 10 },
+        { code: 'kosakata', name: "C. Kosakata (المفردات)", max: 10 },
+        { code: 'kalimat', name: "D. Kalimat Sederhana", max: 10 },
+        { code: 'campuran', name: "E. Campuran", max: 10 }
+      ];
+
+      categories.forEach(cat => {
+        const score = scoreBreakdown[cat.code];
+        const percent = (score / cat.max) * 100;
+        
+        const card = document.createElement('div');
+        card.className = "space-y-1.5";
+        card.innerHTML = `
+          <div class="flex justify-between items-center text-xs sm:text-sm">
+            <span class="font-semibold text-gray-700">${cat.name}</span>
+            <span class="font-bold text-gray-900">${score}/${cat.max} Benar (${percent}%)</span>
+          </div>
+          <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+            <div class="h-full rounded-full transition-all duration-500 ${percent >= 75 ? 'bg-green-600' : 'bg-yellow-500'}" style="width: ${percent}%;"></div>
+          </div>
+        `;
+        breakdownContainer.appendChild(card);
+      });
+
+      showToast("Hasil ujian berhasil dievaluasi!", "success");
+    }
+
+    function submitExamSilently() {
+      examActive = false;
+      if(examTimerInterval) clearInterval(examTimerInterval);
+      submitExam();
+    }
+
+    function resetExam() {
+      showModal(
+        "Mulai Uji Ulang?",
+        "Semua jawaban sebelumnya akan dihapus dan waktu pengerjaan akan diatur ulang menjadi 90 menit.",
+        "Mulai Ulang",
+        function() {
+          startExam();
+        }
+      );
+    }
+
+
+    // ==================== ENGINE 3: KAMUS MINI ====================
+    function initKamus() {
+      const container = document.getElementById('kamus-grid');
+      container.innerHTML = "";
+
+      kamusData.forEach(word => {
+        const card = document.createElement('div');
+        card.className = "bg-white p-5 rounded-2xl border border-gray-100 hover:border-kemenag-100 hover:shadow-md transition duration-200 flex flex-col justify-between";
+        card.innerHTML = `
+          <div class="flex justify-between items-start gap-2 mb-3">
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${getKamusBadgeStyle(word.jenis)}">${word.jenis}</span>
+            <h3 dir="rtl" class="font-arabic text-2xl font-bold text-gray-800">${word.arab}</h3>
+          </div>
+          <div>
+            <p class="text-xs font-semibold text-kemenag-700 italic mb-0.5">${word.translit}</p>
+            <p class="text-sm text-gray-700 font-bold">${word.indo}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function getKamusBadgeStyle(jenis) {
+      switch(jenis) {
+        case 'Waktu': return 'bg-blue-50 text-blue-800';
+        case 'Aktivitas': return 'bg-emerald-50 text-emerald-800';
+        case 'Benda': return 'bg-purple-50 text-purple-800';
+        case 'Subjek': return 'bg-yellow-50 text-yellow-800';
+        default: return 'bg-gray-100 text-gray-800';
+      }
+    }
+
+    function filterKamus() {
+      const search = document.getElementById('kamus-search').value.toLowerCase();
+      const cat = document.getElementById('kamus-category').value;
+      const container = document.getElementById('kamus-grid');
+      container.innerHTML = "";
+
+      const filtered = kamusData.filter(word => {
+        const matchSearch = word.arab.includes(search) || word.indo.toLowerCase().includes(search) || word.translit.toLowerCase().includes(search);
+        const matchCat = cat === 'all' || word.jenis === cat;
+        return matchSearch && matchCat;
+      });
+
+      if(filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center text-gray-400">
+            <i class="fa-regular fa-folder-open text-4xl mb-3"></i>
+            <p class="text-sm font-semibold">Kosakata tidak ditemukan</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(word => {
+        const card = document.createElement('div');
+        card.className = "bg-white p-5 rounded-2xl border border-gray-100 hover:border-kemenag-100 hover:shadow-md transition duration-200 flex flex-col justify-between";
+        card.innerHTML = `
+          <div class="flex justify-between items-start gap-2 mb-3">
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${getKamusBadgeStyle(word.jenis)}">${word.jenis}</span>
+            <h3 dir="rtl" class="font-arabic text-2xl font-bold text-gray-800">${word.arab}</h3>
+          </div>
+          <div>
+            <p class="text-xs font-semibold text-kemenag-700 italic mb-0.5">${word.translit}</p>
+            <p class="text-sm text-gray-700 font-bold">${word.indo}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+
+    // ==================== ENGINE 4: PRINT CENTER (PRINT VIEW) ====================
+    let showAnswersOnPrint = false;
+
+    function initPrintView() {
+      const container = document.getElementById('print-questions-container');
+      container.innerHTML = "";
+
+      let currentSection = "";
+
+      questions.forEach((q, idx) => {
+        // Add Section Header if it changed
+        if (q.category !== currentSection) {
+          currentSection = q.category;
+          const secHeader = document.createElement('div');
+          secHeader.className = "pt-6 pb-2 border-b-2 border-gray-200 mb-4 page-break-avoid";
+          secHeader.innerHTML = `<h3 class="text-base font-extrabold text-gray-800">${q.category}</h3>`;
+          container.appendChild(secHeader);
+        }
+
+        const optionLetters = ["A", "B", "C", "D"];
+
+        const qCard = document.createElement('div');
+        qCard.className = "question-card text-xs sm:text-sm";
+        qCard.innerHTML = `
+          <div class="flex justify-between gap-3 mb-2.5 items-start">
+            <span class="font-bold shrink-0">${idx + 1}.</span>
+            <div class="flex-grow">
+              <!-- Arabic Text (Right Aligned in original exam style) -->
+              <p dir="rtl" class="font-arabic text-xl font-bold text-right leading-loose mb-2">${q.arabic}</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pl-6" id="print-options-${idx}">
+            <!-- Handled below -->
+          </div>
+        `;
+
+        container.appendChild(qCard);
+
+        const optsContainer = document.getElementById(`print-options-${idx}`);
+        q.options.forEach((opt, optIdx) => {
+          const optDiv = document.createElement('div');
+          optDiv.className = "flex items-center gap-1.5";
+          
+          const isCorrect = optIdx === q.correctIndex;
+          const keyClass = isCorrect && showAnswersOnPrint ? 'font-bold underline text-kemenag-800' : '';
+
+          optDiv.innerHTML = `
+            <span class="font-bold">${optionLetters[optIdx]}.</span>
+            <span class="${keyClass}">${opt}</span>
+          `;
+          optsContainer.appendChild(optDiv);
+        });
+      });
+
+      // Render Print Key Grid
+      const keyGrid = document.getElementById('print-key-grid');
+      keyGrid.innerHTML = "";
+      
+      const optionLetters = ["A", "B", "C", "D"];
+      questions.forEach((q, idx) => {
+        const item = document.createElement('div');
+        item.className = "border border-gray-200 p-2 text-center rounded-lg";
+        item.innerHTML = `
+          <span class="text-gray-400 block text-[10px]">No. ${idx + 1}</span>
+          <span class="text-gray-800 font-extrabold">${optionLetters[q.correctIndex]}</span>
+        `;
+        keyGrid.appendChild(item);
+      });
+    }
+
+    function toggleKeyPrint() {
+      showAnswersOnPrint = !showAnswersOnPrint;
+      const btn = document.getElementById('btn-toggle-key-print');
+      const keySheet = document.getElementById('print-key-sheet');
+
+      if (showAnswersOnPrint) {
+        btn.innerHTML = '<i class="fa-solid fa-key"></i> Sembunyikan Kunci Jawaban';
+        btn.className = "bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 font-bold px-4 py-2 rounded-xl text-sm transition flex items-center gap-1.5";
+        keySheet.classList.remove('hidden');
+      } else {
+        btn.innerHTML = '<i class="fa-solid fa-key"></i> Tampilkan Kunci Jawaban';
+        btn.className = "bg-yellow-50 text-yellow-700 border border-yellow-200 hover:bg-yellow-100 font-bold px-4 py-2 rounded-xl text-sm transition flex items-center gap-1.5";
+        keySheet.classList.add('hidden');
+      }
+
+      initPrintView(); // Re-render questions with underline keys
+    }
+
+
+    // ==================== ENGINE 5: DIALOG MODAL & TOAST ====================
+    let activeModalConfirmCallback = null;
+
+    function showModal(title, body, confirmText, onConfirm, hideCancel = false) {
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-body').innerText = body;
+      
+      const confirmBtn = document.getElementById('modal-btn-confirm');
+      confirmBtn.innerText = confirmText;
+      
+      const cancelBtn = document.getElementById('modal-btn-cancel');
+      if (hideCancel) {
+        cancelBtn.classList.add('hidden');
+      } else {
+        cancelBtn.classList.remove('hidden');
+      }
+
+      // Handler injection
+      activeModalConfirmCallback = onConfirm;
+      confirmBtn.onclick = function() {
+        if(activeModalConfirmCallback) activeModalConfirmCallback();
+        closeModal();
+      };
+
+      const modal = document.getElementById('custom-modal');
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('custom-modal').classList.add('hidden');
+      activeModalConfirmCallback = null;
+    }
+
+    function showToast(message, type = "info") {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      
+      let icon = '<i class="fa-solid fa-circle-info"></i>';
+      let bgColor = 'bg-gray-800 text-white';
+
+      if (type === 'success') {
+        icon = '<i class="fa-solid fa-circle-check"></i>';
+        bgColor = 'bg-green-600 text-white';
+      } else if (type === 'error') {
+        icon = '<i class="fa-solid fa-circle-xmark"></i>';
+        bgColor = 'bg-red-600 text-white';
+      } else if (type === 'warning') {
+        icon = '<i class="fa-solid fa-triangle-exclamation"></i>';
+        bgColor = 'bg-yellow-500 text-white';
+      }
+
+      toast.className = `p-4 rounded-xl shadow-lg flex items-center gap-3 text-xs sm:text-sm font-semibold transition-all duration-300 transform translate-y-5 opacity-0 ${bgColor}`;
+      toast.innerHTML = `${icon} <span>${message}</span>`;
+      
+      container.appendChild(toast);
+
+      // Trigger animation
+      setTimeout(() => {
+        toast.classList.remove('translate-y-5', 'opacity-0');
+      }, 50);
+
+      // Destroy delay
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
