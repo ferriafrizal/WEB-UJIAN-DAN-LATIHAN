@@ -5,15 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PAS Bahasa Arab VIII - MTsN 9 Pidie</title>
   
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Google Fonts: Inter (UI) & Amiri (Arabic Typography) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- FontAwesome Icons for clean UI elements -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <script>
@@ -107,11 +104,9 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col antialiased selection:bg-kemenag-100 selection:text-kemenag-900">
 
-  <!-- ==================== HEADER UTAMA & NAVIGASI (NO-PRINT) ==================== -->
   <header class="no-print bg-gradient-to-r from-kemenag-800 to-kemenag-900 text-white shadow-lg border-b-4 border-gold-500 sticky top-0 z-40 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3.5">
-        <!-- SVG Kemenag / Islamic Emblem Logo -->
         <div class="p-2 bg-white rounded-full shadow-inner flex items-center justify-center w-12 h-12">
           <svg class="w-10 h-10 text-kemenag-700" viewBox="0 0 100 100" fill="currentColor">
             <path d="M50 5 L90 28 L90 72 L50 95 L10 72 L10 28 Z" fill="none" stroke="currentColor" stroke-width="6"/>
@@ -128,7 +123,6 @@
         </div>
       </div>
       
-      <!-- Nav Tabs -->
       <nav class="flex flex-wrap justify-center gap-1 sm:gap-2 bg-kemenag-900/40 p-1.5 rounded-xl border border-white/10">
         <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 bg-white text-kemenag-800 shadow">
           <i class="fa-solid fa-house mr-1.5"></i> Dashboard
@@ -149,10 +143,8 @@
     </div>
   </header>
 
-  <!-- ==================== MAIN CONTAINER ==================== -->
   <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-    <!-- TAB 1: DASHBOARD -->
     <section id="content-dashboard" class="tab-content fade-in space-y-6">
       <div class="bg-gradient-to-r from-emerald-600 to-green-700 rounded-2xl text-white p-6 sm:p-8 shadow-xl relative overflow-hidden">
         <div class="absolute right-0 top-0 translate-x-12 -translate-y-12 text-green-500/10 pointer-events-none">
@@ -174,7 +166,6 @@
         </div>
       </div>
 
-      <!-- Stats Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
           <div class="p-3.5 bg-kemenag-50 text-kemenag-600 rounded-xl">
@@ -221,7 +212,6 @@
         </div>
       </div>
 
-      <!-- Kategori Soal Detail -->
       <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
         <h3 class="text-lg font-bold text-gray-800 mb-5 flex items-center gap-2">
           <i class="fa-solid fa-tags text-kemenag-600"></i> Cakupan Pembahasan Bahasa Arab Kelas VIII
@@ -276,7 +266,6 @@
       </div>
     </section>
 
-    <!-- TAB 2: MODE BELAJAR (PRACTICE) -->
     <section id="content-belajar" class="tab-content fade-in hidden space-y-6">
       <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-wrap items-center justify-between gap-4">
         <div>
@@ -298,12 +287,9 @@
         </div>
       </div>
 
-      <!-- Practice Main Layout -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <!-- Question Panel -->
         <div class="lg:col-span-8 space-y-5">
           <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 relative overflow-hidden">
-            <!-- Progress Bar -->
             <div class="absolute top-0 left-0 h-1.5 bg-kemenag-600 transition-all duration-300" id="practice-progress-bar" style="width: 2%;"></div>
             
             <div class="flex justify-between items-center mb-6">
@@ -311,7 +297,6 @@
               <span class="text-xs text-gray-400 font-bold" id="practice-number-label">Soal 1 dari 50</span>
             </div>
 
-            <!-- Question Arabic -->
             <div class="bg-emerald-50/30 border border-emerald-100/50 rounded-2xl p-6 sm:p-8 text-center my-6 relative">
               <button onclick="speakArabic()" class="absolute right-4 top-4 text-emerald-600 hover:text-emerald-800 hover:bg-emerald-50 w-9 h-9 rounded-full flex items-center justify-center transition" title="Dengarkan Pelafalan">
                 <i class="fa-solid fa-volume-high text-lg"></i>
@@ -319,12 +304,9 @@
               <h3 dir="rtl" id="practice-question-arabic" class="font-arabic text-3xl sm:text-4xl text-gray-800 font-bold leading-loose"></h3>
             </div>
 
-            <!-- Options Grid -->
             <div class="grid grid-cols-1 gap-3.5" id="practice-options-container">
-              <!-- Options loaded dynamically -->
-            </div>
+              </div>
 
-            <!-- Action Buttons -->
             <div class="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
               <button onclick="prevPractice()" id="btn-practice-prev" class="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl text-sm transition flex items-center gap-1.5 disabled:opacity-40">
                 <i class="fa-solid fa-arrow-left"></i> Sebelumnya
@@ -340,7 +322,6 @@
             </div>
           </div>
 
-          <!-- Explanation Box -->
           <div id="practice-explanation-box" class="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-inner hidden">
             <h4 class="text-blue-800 font-bold mb-2 flex items-center gap-1.5 text-sm sm:text-base">
               <i class="fa-solid fa-circle-info"></i> Pembahasan Analitis:
@@ -349,7 +330,6 @@
           </div>
         </div>
 
-        <!-- Right Side: Sidebar Navigation Grid -->
         <div class="lg:col-span-4">
           <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
             <h4 class="text-sm font-bold text-gray-800 mb-4 flex items-center justify-between">
@@ -358,10 +338,8 @@
             </h4>
             
             <div class="grid grid-cols-5 sm:grid-cols-10 lg:grid-cols-5 gap-2" id="practice-grid-container">
-              <!-- Grid items loaded dynamically -->
-            </div>
+              </div>
 
-            <!-- Color Legends -->
             <div class="mt-6 pt-5 border-t border-gray-100 flex flex-col gap-2.5 text-xs text-gray-500">
               <div class="flex items-center gap-2">
                 <span class="w-3.5 h-3.5 rounded-lg bg-kemenag-600"></span>
@@ -385,10 +363,8 @@
       </div>
     </section>
 
-    <!-- TAB 3: MODE UJIAN (EXAM) -->
     <section id="content-ujian" class="tab-content fade-in hidden space-y-6">
       
-      <!-- Welcome Panel / Exam Setup -->
       <div id="exam-welcome" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 max-w-2xl mx-auto text-center space-y-6">
         <div class="w-16 h-16 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mx-auto text-3xl">
           <i class="fa-solid fa-clock-rotate-left"></i>
@@ -423,35 +399,27 @@
         </button>
       </div>
 
-      <!-- Live Exam Panel -->
       <div id="exam-panel" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- Left Column: Active Question -->
         <div class="lg:col-span-8 space-y-5">
           <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 relative overflow-hidden">
-            <!-- Exam Progress Bar -->
             <div class="absolute top-0 left-0 h-1.5 bg-yellow-500 transition-all duration-300" id="exam-progress-bar" style="width: 2%;"></div>
             
             <div class="flex justify-between items-center mb-6">
               <span id="exam-section-badge" class="bg-yellow-50 text-yellow-800 text-xs font-bold px-3 py-1.5 rounded-lg border border-yellow-100">Kategori</span>
               
-              <!-- Flag Review Button -->
               <button onclick="toggleExamFlag()" id="btn-exam-flag" class="text-xs font-semibold px-3 py-1.5 rounded-lg border transition duration-150 flex items-center gap-1.5">
                 <i class="fa-regular fa-flag"></i> Ragu-ragu
               </button>
             </div>
 
-            <!-- Question Arabic Block -->
             <div class="bg-gray-50 border border-gray-100 rounded-2xl p-6 sm:p-8 text-center my-6">
               <h3 dir="rtl" id="exam-question-arabic" class="font-arabic text-3xl sm:text-4xl text-gray-800 font-bold leading-loose"></h3>
             </div>
 
-            <!-- Options Container -->
             <div class="grid grid-cols-1 gap-3.5" id="exam-options-container">
-              <!-- Handled via JS -->
-            </div>
+              </div>
 
-            <!-- Nav Controls -->
             <div class="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
               <button onclick="prevExamQuestion()" id="btn-exam-prev" class="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl text-sm transition flex items-center gap-1.5">
                 <i class="fa-solid fa-arrow-left"></i> Sebelumnya
@@ -464,9 +432,7 @@
           </div>
         </div>
 
-        <!-- Right Column: Navigation Grid & Timer -->
         <div class="lg:col-span-4 space-y-5">
-          <!-- Timer Card -->
           <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 text-center space-y-3">
             <span class="text-xs text-gray-400 font-bold uppercase tracking-wider">Sisa Waktu Ujian</span>
             <div class="text-3xl font-black text-gray-800 tracking-wider flex items-center justify-center gap-1.5" id="exam-timer">
@@ -474,7 +440,6 @@
             </div>
           </div>
 
-          <!-- Navigation Grid -->
           <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
             <h4 class="text-sm font-bold text-gray-800 mb-4 flex justify-between items-center">
               <span>Lembar Jawaban</span>
@@ -482,10 +447,8 @@
             </h4>
 
             <div class="grid grid-cols-5 sm:grid-cols-10 lg:grid-cols-5 gap-2" id="exam-grid-container">
-              <!-- Loaded via JS -->
-            </div>
+              </div>
 
-            <!-- Legends -->
             <div class="mt-6 pt-5 border-t border-gray-100 grid grid-cols-2 gap-3 text-[10px] sm:text-xs text-gray-500">
               <div class="flex items-center gap-1.5">
                 <span class="w-3.5 h-3.5 rounded-lg bg-kemenag-600"></span>
@@ -505,7 +468,6 @@
               </div>
             </div>
 
-            <!-- End Exam Button -->
             <button onclick="confirmSubmitExam()" class="mt-6 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl text-sm shadow transition duration-200">
               Selesaikan Ujian
             </button>
@@ -513,18 +475,15 @@
         </div>
       </div>
 
-      <!-- Exam Results Dashboard (Shows up on Submit) -->
       <div id="exam-results" class="hidden space-y-6 max-w-4xl mx-auto">
         <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 text-center space-y-6">
           <div id="result-medal-container" class="w-20 h-20 rounded-full mx-auto flex items-center justify-center text-4xl shadow-inner">
-            <!-- Icon sets by JS -->
-          </div>
+            </div>
           <div>
             <h2 id="result-greeting" class="text-xl sm:text-3xl font-extrabold text-gray-800">Ujian Selesai!</h2>
             <p id="result-subtitle" class="text-xs sm:text-sm text-gray-500 mt-2">Berikut adalah detail ringkasan performa ujian simulasi Anda.</p>
           </div>
 
-          <!-- Score Card -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
             <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 text-center">
               <span class="text-xs text-gray-400 font-bold uppercase tracking-wider block mb-1">Skor Akhir</span>
@@ -554,19 +513,16 @@
           </div>
         </div>
 
-        <!-- Performance breakdown by Category -->
         <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
           <h3 class="text-lg font-bold text-gray-800 mb-5 flex items-center gap-2">
             <i class="fa-solid fa-chart-pie text-kemenag-600"></i> Analisis Performa per Materi Pembahasan
           </h3>
           <div class="space-y-4" id="category-breakdown-container">
-            <!-- Rendered by JS -->
-          </div>
+            </div>
         </div>
       </div>
     </section>
 
-    <!-- TAB 4: KAMUS MINI -->
     <section id="content-kamus" class="tab-content fade-in hidden space-y-6">
       <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-wrap items-center justify-between gap-4">
         <div>
@@ -585,13 +541,10 @@
         </div>
       </div>
 
-      <!-- Kamus Grid Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="kamus-grid">
-        <!-- Handled dynamically -->
-      </div>
+        </div>
     </section>
 
-    <!-- TAB 5: PRINT CENTER -->
     <section id="content-cetak" class="tab-content fade-in hidden space-y-6">
       <div class="no-print bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-wrap items-center justify-between gap-4">
         <div>
@@ -608,9 +561,7 @@
         </div>
       </div>
 
-      <!-- Printable Exam Paper Layout -->
       <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-gray-200 print-area max-w-4xl mx-auto" id="printable-sheet">
-        <!-- KOP SURAT RESMI -->
         <div class="text-center border-b-[5px] border-double border-gray-800 pb-4 mb-6">
           <h3 class="text-base sm:text-lg font-bold tracking-wide uppercase">Kementerian Agama Republik Indonesia</h3>
           <h3 class="text-sm sm:text-base font-extrabold uppercase">Kantor Kementerian Agama Kabupaten Pidie</h3>
@@ -618,7 +569,6 @@
           <p class="text-[11px] sm:text-xs text-gray-500 italic mt-1">Alamat: Jl. Raya Banda Aceh - Medan, Kab. Pidie, Provinsi Aceh</p>
         </div>
 
-        <!-- IDENTITAS UJIAN -->
         <div class="text-center mb-6 space-y-1">
           <h4 class="text-sm sm:text-base font-extrabold tracking-wide">LEMBAR SOAL PENILAIAN AKHIR SEMESTER (PAS) GENAP</h4>
           <h5 class="text-xs font-bold tracking-normal">TAHUN AJARAN 2025/2026</h5>
@@ -635,7 +585,6 @@
           </div>
         </div>
 
-        <!-- PETUNJUK UMUM -->
         <div class="border border-gray-300 p-4 rounded-xl text-[11px] sm:text-xs text-gray-600 space-y-1 mb-8">
           <h4 class="font-bold text-gray-800 mb-1">PETUNJUK UMUM:</h4>
           <p>1. Tulislah nama, nomor ujian, dan kelas Anda pada lembar jawaban yang disediakan.</p>
@@ -644,23 +593,18 @@
           <p>4. Pilih satu jawaban yang paling tepat dengan memberi tanda silang (X) pada huruf A, B, C, atau D.</p>
         </div>
 
-        <!-- KONTEN SOAL -->
         <div class="space-y-8" id="print-questions-container">
-          <!-- Loaded dynamically via JS -->
-        </div>
+          </div>
 
-        <!-- KUNCI JAWABAN (PRINT-ONLY OR TOGGLEABLE) -->
         <div id="print-key-sheet" class="mt-12 pt-8 border-t border-gray-300 hidden break-before-page">
           <h3 class="text-lg font-bold mb-4 text-center text-kemenag-800">KUNCI JAWABAN PAS BAHASA ARAB KELAS VIII</h3>
           <div class="grid grid-cols-5 gap-4 text-sm font-semibold max-w-2xl mx-auto" id="print-key-grid">
-            <!-- Loaded dynamically -->
-          </div>
+            </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
   <footer class="no-print bg-gray-900 text-gray-400 py-6 border-t border-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs space-y-2">
       <p class="font-bold text-gray-300">© 2026 Madrasah Tsanawiyah Negeri 9 Pidie • Kementerian Agama RI</p>
@@ -668,7 +612,6 @@
     </div>
   </footer>
 
-  <!-- ==================== CUSTOM MODAL DIALOGS (NO-PRINT) ==================== -->
   <div id="custom-modal" class="no-print fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden transition-all duration-300">
     <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-5 transform scale-95 transition-all">
       <div id="modal-icon-bg" class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-2xl mx-auto">
@@ -685,10 +628,8 @@
     </div>
   </div>
 
-  <!-- Toast Notification Wrapper -->
   <div id="toast-container" class="no-print fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-  <!-- ==================== CODE & DATA ENGINE (JAVASCRIPT) ==================== -->
   <script>
     // DATASET LENGKAP 50 SOAL
     const questions = [
@@ -712,18 +653,18 @@
       { id: 15, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أقرأ الكتاب تعني:", options: ["Saya membaca buku", "Saya menulis buku", "Saya membeli buku", "Saya menjual buku"], correctIndex: 0, explanation: "Kata 'أَقْرَأُ' (Aqra'u) berarti 'Saya membaca' dan 'الْكِتَابَ' (al-kitab) berarti 'buku'." },
       { id: 16, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أتناول الطعام تعني:", options: ["Saya minum", "Saya makan", "Saya tidur", "Saya bermain"], correctIndex: 1, explanation: "Frasa 'أَتَنَاوَلُ الطَّعَامَ' (Atanawalu ath-tha'am) secara istilah berarti 'Saya makan' atau 'Saya mengonsumsi hidangan'." },
       { id: 17, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أعود إلى البيت تعني:", options: ["Saya pergi", "Saya pulang ke rumah", "Saya makan", "Saya belajar"], correctIndex: 1, explanation: "Kata 'أَعُودُ' (A'udu) berarti 'Saya kembali/pulang', 'إِلَى البيت' (ilal-bait) berarti 'ke rumah'." },
-      { id: 18, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أنام في الليل تعني:", options: ["Saya makan malam", "Saya tidur di malam hari", "Saya belajar", "Saya bermain"], correctIndex: 1, explanation: "Kata 'أَنَامُ' (Anamu) berarti 'Saya tidur', 'فِي اللَّيْلِ' (fil-layl) berarti 'di malam hari'." },
+      { id: 18, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أنام في الليل تعني:", options: ["Saya makan malam", "Saya tidur di malam hari", "Saya belajar", "Saya bermain"], correctIndex: 1, explanation: "Kata 'أَنامُ' (Anamu) berarti 'Saya tidur', 'فِي اللَّيْلِ' (fil-layl) berarti 'di malam hari'." },
       { id: 19, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "ألعب مع الأصدقاء تعني:", options: ["Saya belajar", "Saya bermain dengan teman", "Saya makan", "Saya tidur"], correctIndex: 1, explanation: "Kata 'أَلْعَبُ' (Al'abu) berarti 'Saya bermain', 'مَعَ' (ma'a) berarti 'dengan/bersama', dan 'الْأَصْدِقَاءِ' (al-ashdiqa') berarti 'teman-teman'." },
       { id: 20, category: "Aktivitas Harian (النشاط اليومي)", code: "aktivitas", arabic: "أساعد والدي تعني:", options: ["Saya membantu orang tua", "Saya makan", "Saya tidur", "Saya bermain"], correctIndex: 0, explanation: "Kata 'أُسَاعِدُ' (Usa'idu) berarti 'Saya membantu' dan 'وَالِدِي' (walidi) berarti 'orang tua saya' atau 'ayah saya'." },
 
-      // KATEGORI C: KOSAKATA (21-30)
+    // KATEGORI C: KOSAKATA (21-30)
       { id: 21, category: "Kosakata (المفردات)", code: "kosakata", arabic: "مدرسة artinya:", options: ["Rumah", "Sekolah", "Pasar", "Masjid"], correctIndex: 1, explanation: "Kata 'مَدْرَسَةٌ' (Madrasah) diserap langsung ke dalam bahasa Indonesia menjadi 'Madrasah' yang bermakna 'Sekolah'." },
       { id: 22, category: "Kosakata (المفردات)", code: "kosakata", arabic: "كتاب artinya:", options: ["Pena", "Buku", "Meja", "Kursi"], correctIndex: 1, explanation: "Kata 'كِتَابٌ' (Kitab) bermakna 'Buku' atau sesuatu yang tertulis." },
       { id: 23, category: "Kosakata (المفردات)", code: "kosakata", arabic: "قلم artinya:", options: ["Pensil", "Buku", "Pulpen", "Meja"], correctIndex: 2, explanation: "Kata 'قَلَمٌ' (Qalam) berarti alat tulis tinta atau 'Pulpen/Pena'." },
       { id: 24, category: "Kosakata (المفردات)", code: "kosakata", arabic: "معلم artinya:", options: ["Siswa", "Guru", "Kepala sekolah", "Teman"], correctIndex: 1, explanation: "Kata 'مُعَلِّمٌ' (Mu'allim) berasal dari kata 'allama (mengajar) yang merujuk kepada orang yang mengajar, yaitu 'Guru'." },
       { id: 25, category: "Kosakata (المفردات)", code: "kosakata", arabic: "طالب artinya:", options: ["Guru", "Siswa", "Kepala sekolah", "Ayah"], correctIndex: 1, explanation: "Kata 'طَالِبٌ' (Thalib) berarti pencari (ilmu), dalam dunia pendidikan diterjemahkan sebagai 'Siswa/Murid'." },
       { id: 26, category: "Kosakata (المفردات)", code: "kosakata", arabic: "بيت artinya:", options: ["Sekolah", "Rumah", "Pasar", "Jalan"], correctIndex: 1, explanation: "Kata 'بَيْتٌ' (Bait) berarti tempat berteduh atau 'Rumah'." },
-      { id: 27, category: "Kosakata (المفردات)", code: "kosakata", arabic: "مسجد artinya:", options: ["Rumah", "Sekolah", "Masjid", "Pasar"], correctIndex: 2, explanation: "Kata 'مَسْجِدٌ' (Masjid) adalah tempat sujud bagi umat Islam untuk beribadah." },
+      { id: 27, category: "Kosakata (المفردات)", code: "kosakata", arabic: "مسjed artinya:", options: ["Rumah", "Sekolah", "Masjid", "Pasar"], correctIndex: 2, explanation: "Kata 'مَسْجِدٌ' (Masjid) adalah tempat sujud bagi umat Islam untuk beribadah." },
       { id: 28, category: "Kosakata (المفردات)", code: "kosakata", arabic: "سوق artinya:", options: ["Pasar", "Sekolah", "Rumah", "Masjid"], correctIndex: 0, explanation: "Kata 'سُوْقٌ' (Suq) merujuk pada tempat transaksi jual-beli, yaitu 'Pasar'." },
       { id: 29, category: "Kosakata (المفردات)", code: "kosakata", arabic: "طعام artinya:", options: ["Minuman", "Makanan", "Buku", "Pena"], correctIndex: 1, explanation: "Kata 'طَعَامٌ' (Tha'am) berarti bahan konsumsi atau 'Makanan'." },
       { id: 30, category: "Kosakata (المفردات)", code: "kosakata", arabic: "ماء artinya:", options: ["Air", "Api", "Tanah", "Angin"], correctIndex: 0, explanation: "Kata 'مَاءٌ' (Ma') merupakan zat cair yang vital untuk kehidupan, yaitu 'Air'." },
@@ -799,19 +740,18 @@
     // State Mode Belajar
     let filteredPracticeQuestions = [...questions];
     let currentPracticeIndex = 0;
-    let practiceAnswers = Array(50).fill(null); // Menyimpan status benarsalah user (true/false)
+    let practiceAnswers = Array(50).fill(null); 
 
     // State Mode Ujian
     let examActive = false;
     let currentExamIndex = 0;
-    let examUserAnswers = Array(50).fill(null); // Menyimpan index opsi terpilih (0,1,2,3)
-    let examFlags = Array(50).fill(false); // Penanda ragu-ragu
+    let examUserAnswers = Array(50).fill(null); 
+    let examFlags = Array(50).fill(false); 
     let examTimerInterval = null;
-    let examSecondsRemaining = 90 * 60; // 90 Menit
+    let examSecondsRemaining = 90 * 60; 
 
     // ONLOAD HANDLER
     window.onload = function() {
-      // Load best score from local storage
       const savedScore = localStorage.getItem('pas_arabic_best_score');
       if(savedScore) {
         document.getElementById('best-score').innerText = savedScore + "/100";
@@ -820,7 +760,6 @@
         document.getElementById('completion-status').classList.add('text-kemenag-600', 'font-bold');
       }
 
-      // Initialize UI Components
       initPracticeGrid();
       loadPracticeQuestion();
       initKamus();
@@ -848,12 +787,9 @@
     }
 
     function performTabSwitch(tabId) {
-      // Hide all tabs
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      // Show targeted tab
       document.getElementById(`content-${tabId}`).classList.remove('hidden');
 
-      // Update Nav buttons styling
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.className = "tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 text-gray-200 hover:text-white hover:bg-white/10";
       });
@@ -879,7 +815,6 @@
     }
 
     function jumpToPractice(index) {
-      // Find position of this global index inside filtered set
       const targetQuestion = questions[index];
       const filteredIndex = filteredPracticeQuestions.findIndex(q => q.id === targetQuestion.id);
       
@@ -897,16 +832,13 @@
       const q = filteredPracticeQuestions[currentPracticeIndex];
       const globalIndex = questions.findIndex(item => item.id === q.id);
 
-      // Update Labels
       document.getElementById('practice-category-label').innerText = q.category;
       document.getElementById('practice-number-label').innerText = `Soal ${currentPracticeIndex + 1} dari ${filteredPracticeQuestions.length} (Soal No. ${q.id})`;
       document.getElementById('practice-question-arabic').innerText = q.arabic;
       
-      // Update Progress Bar
       const progressPercent = ((currentPracticeIndex + 1) / filteredPracticeQuestions.length) * 100;
       document.getElementById('practice-progress-bar').style.width = `${progressPercent}%`;
 
-      // Render Options
       const optionsContainer = document.getElementById('practice-options-container');
       optionsContainer.innerHTML = "";
 
@@ -917,7 +849,6 @@
         btn.id = `practice-opt-${idx}`;
         btn.className = "w-full text-left p-4 rounded-xl border border-gray-200 hover:border-kemenag-300 hover:bg-kemenag-50/10 flex items-center gap-3 transition-all duration-150 text-xs sm:text-sm";
         
-        // Circular badge inside option
         const badge = document.createElement('span');
         badge.id = `practice-opt-badge-${idx}`;
         badge.className = "w-7 h-7 bg-gray-100 text-gray-600 rounded-full font-bold flex items-center justify-center shrink-0 border border-gray-200";
@@ -930,19 +861,14 @@
         textSpan.innerText = opt;
         btn.appendChild(textSpan);
 
-        // Option Action
         btn.onclick = () => evaluatePracticeChoice(idx, isCorrect);
         optionsContainer.appendChild(btn);
       });
 
-      // Update Prev Button
       document.getElementById('btn-practice-prev').disabled = currentPracticeIndex === 0;
-
-      // Handle Explanation Box Reset
       document.getElementById('practice-explanation-box').classList.add('hidden');
       document.getElementById('btn-practice-explain').classList.add('hidden');
 
-      // Sync active state in the grid map
       document.querySelectorAll('[id^="practice-grid-"]').forEach(el => {
         el.classList.remove('ring-4', 'ring-kemenag-600/30', 'border-kemenag-600', 'scale-105');
       });
@@ -956,22 +882,19 @@
       const q = filteredPracticeQuestions[currentPracticeIndex];
       const globalIndex = questions.findIndex(item => item.id === q.id);
 
-      // Lock buttons to prevent multiple clicks
       q.options.forEach((_, optIdx) => {
         const optBtn = document.getElementById(`practice-opt-${optIdx}`);
-        optBtn.onclick = null; // Disable click
+        optBtn.onclick = null; 
         
         const badge = document.getElementById(`practice-opt-badge-${optIdx}`);
         const textSpan = document.getElementById(`practice-opt-text-${optIdx}`);
 
         if (optIdx === q.correctIndex) {
-          // Highlight correct answer in Green
           optBtn.className = "w-full text-left p-4 rounded-xl border border-green-200 bg-green-50/50 flex items-center gap-3 transition-all duration-150 text-xs sm:text-sm";
           badge.className = "w-7 h-7 bg-green-600 text-white rounded-full font-bold flex items-center justify-center shrink-0";
           badge.innerHTML = '<i class="fa-solid fa-check"></i>';
           textSpan.className = "font-bold text-green-800";
         } else if (optIdx === idx) {
-          // Highlight wrong user selection in Red
           optBtn.className = "w-full text-left p-4 rounded-xl border border-red-200 bg-red-50/50 flex items-center gap-3 transition-all duration-150 text-xs sm:text-sm";
           badge.className = "w-7 h-7 bg-red-600 text-white rounded-full font-bold flex items-center justify-center shrink-0";
           badge.innerHTML = '<i class="fa-solid fa-xmark"></i>';
@@ -981,18 +904,15 @@
         }
       });
 
-      // Save answer state in grid map
       practiceAnswers[globalIndex] = isCorrect;
       const gridBtn = document.getElementById(`practice-grid-${globalIndex}`);
       if(gridBtn) {
         gridBtn.className = `w-10 h-10 font-bold text-xs rounded-xl flex items-center justify-center border transition-all duration-150 ${isCorrect ? 'bg-green-600 text-white border-green-600' : 'bg-red-500 text-white border-red-500'}`;
       }
 
-      // Update progress counter
       const answeredCount = practiceAnswers.filter(v => v !== null).length;
       document.getElementById('practice-answered-count').innerText = `${answeredCount}/50 Selesai`;
 
-      // Show Explanation Box
       document.getElementById('practice-explanation-text').innerText = q.explanation;
       document.getElementById('practice-explanation-box').classList.remove('hidden');
       document.getElementById('btn-practice-explain').classList.remove('hidden');
@@ -1046,26 +966,25 @@
       );
     }
 
-    function revealExplanation() {
-      const box = document.getElementById('practice-explanation-box');
-      box.classList.toggle('hidden');
-      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
     // Text to speech Arab pelafalan
     function speakArabic() {
       const arabicText = document.getElementById('practice-question-arabic').innerText;
       if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel(); // Stop any pending speech
+        window.speechSynthesis.cancel(); 
         const utterance = new SpeechSynthesisUtterance(arabicText);
         utterance.lang = 'ar-SA';
-        utterance.rate = 0.85; // slightly slower for educational purposes
+        utterance.rate = 0.85; 
         window.speechSynthesis.speak(utterance);
       } else {
         showToast("Peramban Anda tidak mendukung fitur pelafalan suara (TTS).", "warning");
       }
     }
 
+    function revealExplanation() {
+      const box = document.getElementById('practice-explanation-box');
+      box.classList.toggle('hidden');
+      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
 
     // ==================== ENGINE 2: SIMULASI UJIAN (CBT) ====================
     function startExam() {
@@ -1073,14 +992,12 @@
       currentExamIndex = 0;
       examUserAnswers = Array(50).fill(null);
       examFlags = Array(50).fill(false);
-      examSecondsRemaining = 90 * 60; // Reset 90 Menit
+      examSecondsRemaining = 90 * 60; 
 
-      // UI Swapping
       document.getElementById('exam-welcome').classList.add('hidden');
       document.getElementById('exam-results').classList.add('hidden');
       document.getElementById('exam-panel').classList.remove('hidden');
 
-      // Setup Exam Map
       initExamGrid();
       loadExamQuestion();
       startExamTimer();
@@ -1105,17 +1022,14 @@
     function loadExamQuestion() {
       const q = questions[currentExamIndex];
 
-      // Update Headers
       document.getElementById('exam-section-badge').innerText = q.category;
       document.getElementById('exam-question-arabic').innerText = q.arabic;
 
-      // Update Progress Bar
       const answeredCount = examUserAnswers.filter(v => v !== null).length;
       const progressPercent = (answeredCount / 50) * 100;
       document.getElementById('exam-progress-bar').style.width = `${progressPercent}%`;
       document.getElementById('exam-progress-counter').innerText = `${answeredCount}/50 Terisi`;
 
-      // Options Rendering
       const container = document.getElementById('exam-options-container');
       container.innerHTML = "";
 
@@ -1147,11 +1061,9 @@
         container.appendChild(btn);
       });
 
-      // Controls State
       document.getElementById('btn-exam-prev').disabled = currentExamIndex === 0;
       document.getElementById('btn-exam-next').innerText = currentExamIndex === 49 ? "Selesai" : "Berikutnya";
 
-      // Flag state sync
       const flagBtn = document.getElementById('btn-exam-flag');
       if (examFlags[currentExamIndex]) {
         flagBtn.className = "text-xs font-semibold px-3 py-1.5 rounded-lg border bg-yellow-50 text-yellow-700 border-yellow-300 flex items-center gap-1.5";
@@ -1161,18 +1073,17 @@
         flagBtn.innerHTML = '<i class="fa-regular fa-flag"></i> Ragu-ragu';
       }
 
-      // Sync active state in navigation grid mapping
       syncExamGridStyles();
     }
 
     function selectExamAnswer(optionIndex) {
       examUserAnswers[currentExamIndex] = optionIndex;
-      loadExamQuestion(); // re-render options
+      loadExamQuestion(); 
     }
 
     function toggleExamFlag() {
       examFlags[currentExamIndex] = !examFlags[currentExamIndex];
-      loadExamQuestion(); // sync view
+      loadExamQuestion(); 
     }
 
     function jumpToExamQuestion(index) {
@@ -1205,7 +1116,6 @@
         const isFlagged = examFlags[idx];
         const isActive = currentExamIndex === idx;
 
-        // Base styles
         btn.className = "w-10 h-10 font-bold text-xs rounded-xl flex items-center justify-center border transition-all duration-150";
 
         if (isActive) {
@@ -1222,7 +1132,6 @@
       });
     }
 
-    // Timer Engine
     function startExamTimer() {
       if(examTimerInterval) clearInterval(examTimerInterval);
       
@@ -1235,7 +1144,7 @@
             "Waktu pengerjaan ujian selama 90 menit telah usai. Hasil pengerjaan Anda otomatis dikirim.",
             "Lihat Hasil Ujian",
             null,
-            true // force trigger style without cancel
+            true 
           );
         } else {
           examSecondsRemaining--;
@@ -1260,7 +1169,6 @@
       document.getElementById('exam-timer').innerHTML = `<i class="fa-regular fa-clock text-yellow-500"></i> ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
 
-    // Submit Actions
     function confirmSubmitExam() {
       const unanswered = examUserAnswers.filter(ans => ans === null).length;
       let modalText = "Apakah Anda yakin ingin menyelesaikan ujian dan mengirim semua berkas jawaban Anda?";
@@ -1282,7 +1190,6 @@
       examActive = false;
       if(examTimerInterval) clearInterval(examTimerInterval);
 
-      // Score Calculation
       let correctAnswers = 0;
       let scoreBreakdown = { jam: 0, aktivitas: 0, kosakata: 0, kalimat: 0, campuran: 0 };
       
@@ -1295,18 +1202,15 @@
 
       const finalScore = (correctAnswers / 50) * 100;
       
-      // Save best score to local storage
       const previousBest = parseFloat(localStorage.getItem('pas_arabic_best_score') || '0');
       if (finalScore > previousBest) {
         localStorage.setItem('pas_arabic_best_score', finalScore.toFixed(0));
         document.getElementById('best-score').innerText = finalScore.toFixed(0) + "/100";
       }
 
-      // Display results card
       document.getElementById('exam-panel').classList.add('hidden');
       document.getElementById('exam-results').classList.remove('hidden');
 
-      // Update Results GUI
       document.getElementById('result-score').innerText = finalScore.toFixed(0);
       document.getElementById('result-correct').innerText = correctAnswers;
       document.getElementById('result-wrong').innerText = 50 - correctAnswers;
@@ -1329,7 +1233,6 @@
         document.getElementById('result-subtitle').innerText = "Nilai Anda belum mencapai KKM minimum (75). Teruslah berlatih, usaha tidak akan mengkhianati hasil.";
       }
 
-      // Render Breakdown Bars
       const breakdownContainer = document.getElementById('category-breakdown-container');
       breakdownContainer.innerHTML = "";
 
@@ -1378,7 +1281,6 @@
         }
       );
     }
-
 
     // ==================== ENGINE 3: KAMUS MINI ====================
     function initKamus() {
@@ -1451,7 +1353,6 @@
       });
     }
 
-
     // ==================== ENGINE 4: PRINT CENTER (PRINT VIEW) ====================
     let showAnswersOnPrint = false;
 
@@ -1462,7 +1363,6 @@
       let currentSection = "";
 
       questions.forEach((q, idx) => {
-        // Add Section Header if it changed
         if (q.category !== currentSection) {
           currentSection = q.category;
           const secHeader = document.createElement('div');
@@ -1479,13 +1379,11 @@
           <div class="flex justify-between gap-3 mb-2.5 items-start">
             <span class="font-bold shrink-0">${idx + 1}.</span>
             <div class="flex-grow">
-              <!-- Arabic Text (Right Aligned in original exam style) -->
               <p dir="rtl" class="font-arabic text-xl font-bold text-right leading-loose mb-2">${q.arabic}</p>
             </div>
           </div>
           <div class="grid grid-cols-2 gap-2 pl-6" id="print-options-${idx}">
-            <!-- Handled below -->
-          </div>
+            </div>
         `;
 
         container.appendChild(qCard);
@@ -1506,7 +1404,6 @@
         });
       });
 
-      // Render Print Key Grid
       const keyGrid = document.getElementById('print-key-grid');
       keyGrid.innerHTML = "";
       
@@ -1537,9 +1434,8 @@
         keySheet.classList.add('hidden');
       }
 
-      initPrintView(); // Re-render questions with underline keys
+      initPrintView(); 
     }
-
 
     // ==================== ENGINE 5: DIALOG MODAL & TOAST ====================
     let activeModalConfirmCallback = null;
@@ -1558,7 +1454,6 @@
         cancelBtn.classList.remove('hidden');
       }
 
-      // Handler injection
       activeModalConfirmCallback = onConfirm;
       confirmBtn.onclick = function() {
         if(activeModalConfirmCallback) activeModalConfirmCallback();
@@ -1597,12 +1492,10 @@
       
       container.appendChild(toast);
 
-      // Trigger animation
       setTimeout(() => {
         toast.classList.remove('translate-y-5', 'opacity-0');
       }, 50);
 
-      // Destroy delay
       setTimeout(() => {
         toast.classList.add('opacity-0', 'translate-y-2');
         setTimeout(() => toast.remove(), 300);
